@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'app.lovable.3b10473eae2b4e8d8705d9f2824cf093',
+  appId: 'com.domestiko.app',
   appName: 'domestiko',
   webDir: 'dist',
   server: {
