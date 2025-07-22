@@ -5,7 +5,7 @@ import {
   Zap, 
   Scissors, 
   Home, 
-  Baby, 
+  PaintBucket, 
   Settings,
   ArrowRight 
 } from "lucide-react";
@@ -36,10 +36,10 @@ const services = [
     color: "text-purple-600"
   },
   {
-    icon: Baby,
-    title: "Cuidado Infantil",
-    description: "Niñeras certificadas, cuidado de bebés y apoyo en actividades familiares.",
-    color: "text-pink-600"
+    icon: PaintBucket,
+    title: "Servicios de Pintura",
+    description: "Pintura interior y exterior, acabados especiales, reparación de paredes.",
+    color: "text-orange-600"
   },
   {
     icon: Settings,
