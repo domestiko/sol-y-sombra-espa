@@ -68,7 +68,7 @@ const CTA = () => {
             </div>
 
             {/* Para Profesionales */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 animate-scale-in" style={{animationDelay: '0.2s'}}>
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 animate-scale-in" style={{animationDelay: "0.2s"}}>
               <div className="text-center mb-6">
                 <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Download className="h-8 w-8 text-white" />
