@@ -14,6 +14,59 @@ export type Database = {
   }
   public: {
     Tables: {
+      booking_payments: {
+        Row: {
+          booking_id: string
+          created_at: string
+          guarantee_amount: number | null
+          id: string
+          paid_at: string | null
+          payment_method: Database["public"]["Enums"]["payment_method_type"]
+          payment_status:
+            | Database["public"]["Enums"]["transaction_status"]
+            | null
+          stripe_payment_intent_id: string | null
+          total_amount: number
+          updated_at: string
+        }
+        Insert: {
+          booking_id: string
+          created_at?: string
+          guarantee_amount?: number | null
+          id?: string
+          paid_at?: string | null
+          payment_method: Database["public"]["Enums"]["payment_method_type"]
+          payment_status?:
+            | Database["public"]["Enums"]["transaction_status"]
+            | null
+          stripe_payment_intent_id?: string | null
+          total_amount: number
+          updated_at?: string
+        }
+        Update: {
+          booking_id?: string
+          created_at?: string
+          guarantee_amount?: number | null
+          id?: string
+          paid_at?: string | null
+          payment_method?: Database["public"]["Enums"]["payment_method_type"]
+          payment_status?:
+            | Database["public"]["Enums"]["transaction_status"]
+            | null
+          stripe_payment_intent_id?: string | null
+          total_amount?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "booking_payments_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       bookings: {
         Row: {
           address: string
@@ -79,6 +132,82 @@ export type Database = {
             columns: ["service_id"]
             isOneToOne: false
             referencedRelation: "professional_services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      commission_charges: {
+        Row: {
+          booking_id: string
+          charge_status:
+            | Database["public"]["Enums"]["transaction_status"]
+            | null
+          charged_at: string | null
+          commission_amount: number
+          commission_rate: number
+          created_at: string
+          id: string
+          last_retry_at: string | null
+          payment_method_id: string | null
+          professional_id: string
+          retry_count: number | null
+          stripe_charge_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          booking_id: string
+          charge_status?:
+            | Database["public"]["Enums"]["transaction_status"]
+            | null
+          charged_at?: string | null
+          commission_amount: number
+          commission_rate?: number
+          created_at?: string
+          id?: string
+          last_retry_at?: string | null
+          payment_method_id?: string | null
+          professional_id: string
+          retry_count?: number | null
+          stripe_charge_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          booking_id?: string
+          charge_status?:
+            | Database["public"]["Enums"]["transaction_status"]
+            | null
+          charged_at?: string | null
+          commission_amount?: number
+          commission_rate?: number
+          created_at?: string
+          id?: string
+          last_retry_at?: string | null
+          payment_method_id?: string | null
+          professional_id?: string
+          retry_count?: number | null
+          stripe_charge_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "commission_charges_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "commission_charges_payment_method_id_fkey"
+            columns: ["payment_method_id"]
+            isOneToOne: false
+            referencedRelation: "professional_payment_cards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "commission_charges_professional_id_fkey"
+            columns: ["professional_id"]
+            isOneToOne: false
+            referencedRelation: "professionals"
             referencedColumns: ["id"]
           },
         ]
@@ -149,6 +278,56 @@ export type Database = {
           },
         ]
       }
+      payment_transactions: {
+        Row: {
+          amount: number
+          booking_payment_id: string
+          created_at: string
+          currency: string | null
+          id: string
+          processed_at: string | null
+          status: Database["public"]["Enums"]["transaction_status"] | null
+          stripe_fee: number | null
+          stripe_payment_intent_id: string | null
+          transaction_type: string
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          booking_payment_id: string
+          created_at?: string
+          currency?: string | null
+          id?: string
+          processed_at?: string | null
+          status?: Database["public"]["Enums"]["transaction_status"] | null
+          stripe_fee?: number | null
+          stripe_payment_intent_id?: string | null
+          transaction_type: string
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          booking_payment_id?: string
+          created_at?: string
+          currency?: string | null
+          id?: string
+          processed_at?: string | null
+          status?: Database["public"]["Enums"]["transaction_status"] | null
+          stripe_fee?: number | null
+          stripe_payment_intent_id?: string | null
+          transaction_type?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_transactions_booking_payment_id_fkey"
+            columns: ["booking_payment_id"]
+            isOneToOne: false
+            referencedRelation: "booking_payments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       premium_services: {
         Row: {
           created_at: string
@@ -186,6 +365,123 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "premium_services_professional_id_fkey"
+            columns: ["professional_id"]
+            isOneToOne: false
+            referencedRelation: "professionals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      professional_payment_cards: {
+        Row: {
+          card_brand: string
+          card_last_four: string
+          created_at: string
+          id: string
+          is_default: boolean | null
+          professional_id: string
+          stripe_customer_id: string
+          stripe_payment_method_id: string
+          updated_at: string
+        }
+        Insert: {
+          card_brand: string
+          card_last_four: string
+          created_at?: string
+          id?: string
+          is_default?: boolean | null
+          professional_id: string
+          stripe_customer_id: string
+          stripe_payment_method_id: string
+          updated_at?: string
+        }
+        Update: {
+          card_brand?: string
+          card_last_four?: string
+          created_at?: string
+          id?: string
+          is_default?: boolean | null
+          professional_id?: string
+          stripe_customer_id?: string
+          stripe_payment_method_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "professional_payment_cards_professional_id_fkey"
+            columns: ["professional_id"]
+            isOneToOne: false
+            referencedRelation: "professionals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      professional_payouts: {
+        Row: {
+          booking_payment_id: string
+          commission_amount: number
+          created_at: string
+          gross_amount: number
+          id: string
+          net_amount: number
+          payment_method_id: string | null
+          payout_status:
+            | Database["public"]["Enums"]["transaction_status"]
+            | null
+          professional_id: string
+          stripe_transfer_id: string | null
+          transferred_at: string | null
+          updated_at: string
+        }
+        Insert: {
+          booking_payment_id: string
+          commission_amount: number
+          created_at?: string
+          gross_amount: number
+          id?: string
+          net_amount: number
+          payment_method_id?: string | null
+          payout_status?:
+            | Database["public"]["Enums"]["transaction_status"]
+            | null
+          professional_id: string
+          stripe_transfer_id?: string | null
+          transferred_at?: string | null
+          updated_at?: string
+        }
+        Update: {
+          booking_payment_id?: string
+          commission_amount?: number
+          created_at?: string
+          gross_amount?: number
+          id?: string
+          net_amount?: number
+          payment_method_id?: string | null
+          payout_status?:
+            | Database["public"]["Enums"]["transaction_status"]
+            | null
+          professional_id?: string
+          stripe_transfer_id?: string | null
+          transferred_at?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "professional_payouts_booking_payment_id_fkey"
+            columns: ["booking_payment_id"]
+            isOneToOne: false
+            referencedRelation: "booking_payments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "professional_payouts_payment_method_id_fkey"
+            columns: ["payment_method_id"]
+            isOneToOne: false
+            referencedRelation: "professional_payment_cards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "professional_payouts_professional_id_fkey"
             columns: ["professional_id"]
             isOneToOne: false
             referencedRelation: "professionals"
@@ -531,7 +827,11 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      payment_method_type:
+        | "direct_payment"
+        | "guarantee_payment"
+        | "full_app_payment"
+      transaction_status: "pending" | "completed" | "failed" | "refunded"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -658,6 +958,13 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      payment_method_type: [
+        "direct_payment",
+        "guarantee_payment",
+        "full_app_payment",
+      ],
+      transaction_status: ["pending", "completed", "failed", "refunded"],
+    },
   },
 } as const
