@@ -6,8 +6,8 @@
 
 @layer base {
   :root {
-    /* Colores neutros y minimalistas */
-    --background: 0 0% 99%;
+    /* Fondo moderno con gradiente sutil */
+    --background: 240 10% 98%;
     --foreground: 0 0% 9%;
 
     --card: 0 0% 100%;
