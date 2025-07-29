@@ -80,55 +80,6 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Elementos decorativos modernos con la paleta de la imagen */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Patrón geométrico turquesa - Top Left */}
-        <div className="absolute top-16 left-16 opacity-20">
-          <svg width="180" height="180" viewBox="0 0 180 180" className="text-white">
-            <defs>
-              <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style={{stopColor:'currentColor', stopOpacity:0.6}} />
-                <stop offset="100%" style={{stopColor:'currentColor', stopOpacity:0.2}} />
-              </linearGradient>
-            </defs>
-            <path d="M40 60 L90 20 L140 60 L140 120 L90 140 L40 120 Z" fill="url(#tealGrad)" stroke="currentColor" strokeWidth="1"/>
-            <path d="M60 80 L90 60 L120 80 L120 110 L90 120 L60 110 Z" fill="currentColor" opacity="0.3"/>
-            <rect x="85" y="50" width="10" height="40" fill="currentColor" opacity="0.8"/>
-          </svg>
-        </div>
-        
-        {/* Elementos circulares - Top Right */}
-        <div className="absolute top-32 right-20 opacity-15">
-          <svg width="160" height="160" viewBox="0 0 160 160" className="text-white">
-            <circle cx="80" cy="80" r="60" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.3"/>
-            <circle cx="80" cy="80" r="40" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.4"/>
-            <circle cx="80" cy="80" r="12" fill="currentColor" opacity="0.8"/>
-          </svg>
-        </div>
-        
-        {/* Patrones de herramientas - Bottom Left */}
-        <div className="absolute bottom-24 left-24 opacity-15">
-          <svg width="140" height="140" viewBox="0 0 140 140" className="text-white">
-            <path d="M40 80 L70 60 L100 80 L70 100 Z" fill="currentColor" opacity="0.4"/>
-            <path d="M60 95 L80 85 L100 95 L80 105 Z" fill="currentColor" opacity="0.3"/>
-            <path d="M50 70 L65 60 L80 70 L65 80 Z" fill="currentColor" opacity="0.4"/>
-          </svg>
-        </div>
-        
-        {/* Formas fluidas - Bottom Right */}
-        <div className="absolute bottom-32 right-32 opacity-15">
-          <svg width="120" height="120" viewBox="0 0 120 120" className="text-white">
-            <path d="M20 60 Q40 20 80 40 Q100 60 80 80 Q60 100 20 80 Q10 70 20 60" fill="currentColor" opacity="0.4"/>
-            <circle cx="60" cy="60" r="15" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.5"/>
-          </svg>
-        </div>
-      </div>
-
-      {/* Fondo con gradiente sutil */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/30 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-secondary/20 rounded-full blur-3xl" />
-      </div>
     </section>
   );
 };
