@@ -55,7 +55,10 @@ const Header = () => {
                 <Button variant="ghost" onClick={() => navigate('/auth')}>
                   Iniciar sesión
                 </Button>
-                <Button variant="hero">
+                <Button 
+                  variant="hero"
+                  onClick={() => navigate('/book-service')}
+                >
                   Solicitar servicio
                 </Button>
               </>
@@ -106,7 +109,10 @@ const Header = () => {
                     <Button variant="ghost" className="justify-start" onClick={() => { navigate('/auth'); setIsMenuOpen(false); }}>
                       Iniciar sesión
                     </Button>
-                    <Button variant="hero">
+                    <Button 
+                      variant="hero"
+                      onClick={() => { navigate('/book-service'); setIsMenuOpen(false); }}
+                    >
                       Solicitar servicio
                     </Button>
                   </>

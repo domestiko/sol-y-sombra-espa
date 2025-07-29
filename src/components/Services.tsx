@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import { 
   Wrench, 
   Zap, 
@@ -50,6 +51,8 @@ const services = [
 ];
 
 const Services = () => {
+  const navigate = useNavigate();
+  
   return (
     <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -81,7 +84,11 @@ const Services = () => {
                 <p className="text-muted-foreground mb-6 leading-relaxed">
                   {service.description}
                 </p>
-                <Button variant="ghost" className="group/btn text-primary hover:text-primary-foreground hover:bg-primary">
+                <Button 
+                  variant="ghost" 
+                  className="group/btn text-primary hover:text-primary-foreground hover:bg-primary"
+                  onClick={() => navigate('/professionals')}
+                >
                   Ver profesionales
                   <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                 </Button>
@@ -94,7 +101,11 @@ const Services = () => {
           <p className="text-muted-foreground mb-6">
             ¿No encuentras el servicio que necesitas?
           </p>
-          <Button variant="outline" size="lg">
+          <Button 
+            variant="outline" 
+            size="lg"
+            onClick={() => navigate('/book-service')}
+          >
             Solicitar servicio personalizado
           </Button>
         </div>

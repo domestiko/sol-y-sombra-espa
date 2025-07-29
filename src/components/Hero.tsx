@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Clock, Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-image.jpg";
 
 const Hero = () => {
+  const navigate = useNavigate();
+  
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden">
       {/* Background Image */}
@@ -46,11 +49,21 @@ const Hero = () => {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-scale-in">
-            <Button variant="hero" size="lg" className="w-full sm:w-auto">
+            <Button 
+              variant="hero" 
+              size="lg" 
+              className="w-full sm:w-auto"
+              onClick={() => navigate('/book-service')}
+            >
               Solicitar Servicio
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            <Button variant="professional" size="lg" className="w-full sm:w-auto">
+            <Button 
+              variant="professional" 
+              size="lg" 
+              className="w-full sm:w-auto"
+              onClick={() => navigate('/auth')}
+            >
               Soy Profesional
             </Button>
           </div>
