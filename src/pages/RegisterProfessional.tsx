@@ -18,7 +18,11 @@ import {
   DollarSign,
   Star,
   ArrowLeft,
-  CheckCircle
+  CheckCircle,
+  Upload,
+  FileText,
+  Shield,
+  AlertCircle
 } from "lucide-react";
 
 interface ServiceCategory {
@@ -63,6 +67,11 @@ const RegisterProfessional = () => {
     priceMin: "",
     priceMax: ""
   });
+
+  // Verification documents
+  const [identityDocument, setIdentityDocument] = useState<File | null>(null);
+  const [policeCertificate, setPoliceCertificate] = useState<File | null>(null);
+  const [uploadingDocs, setUploadingDocs] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -154,6 +163,15 @@ const RegisterProfessional = () => {
       return;
     }
 
+    if (!identityDocument || !policeCertificate) {
+      toast({
+        title: "Documentos requeridos",
+        description: "Debes cargar tanto el documento de identidad como la carta de buena conducta",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setSubmitting(true);
 
     try {
@@ -177,7 +195,10 @@ const RegisterProfessional = () => {
 
       if (professionalError) throw professionalError;
 
-      // 2. Create professional services
+      // 2. Upload verification documents
+      const documentUrls = await uploadVerificationDocuments(professional.id);
+
+      // 3. Create professional services
       const services = selectedServices.map(service => ({
         professional_id: professional.id,
         category_id: service.categoryId,
@@ -193,9 +214,23 @@ const RegisterProfessional = () => {
 
       if (servicesError) throw servicesError;
 
+      // 4. Create verification record
+      const { error: verificationError } = await supabase
+        .from('professional_verifications')
+        .insert({
+          professional_id: professional.id,
+          identity_document_url: documentUrls.identityUrl,
+          police_certificate_url: documentUrls.policeUrl,
+          identity_verified: false,
+          police_verified: false,
+          overall_verified: false
+        });
+
+      if (verificationError) throw verificationError;
+
       toast({
         title: "¡Registro exitoso!",
-        description: "Tu solicitud ha sido enviada para revisión. Te contactaremos pronto.",
+        description: "Tu solicitud y documentos han sido enviados para verificación. Te contactaremos pronto.",
       });
 
       navigate('/dashboard');
@@ -218,6 +253,75 @@ const RegisterProfessional = () => {
       }
     } finally {
       setSubmitting(false);
+    }
+  };
+
+  const uploadVerificationDocuments = async (professionalId: string) => {
+    if (!identityDocument || !policeCertificate) {
+      throw new Error("Documents are required");
+    }
+
+    setUploadingDocs(true);
+
+    try {
+      // Upload identity document
+      const identityFileName = `${user?.id}/identity-${Date.now()}.${identityDocument.name.split('.').pop()}`;
+      const { data: identityData, error: identityError } = await supabase.storage
+        .from('identity-documents')
+        .upload(identityFileName, identityDocument);
+
+      if (identityError) throw identityError;
+
+      // Upload police certificate
+      const policeFileName = `${user?.id}/police-${Date.now()}.${policeCertificate.name.split('.').pop()}`;
+      const { data: policeData, error: policeError } = await supabase.storage
+        .from('police-certificates')
+        .upload(policeFileName, policeCertificate);
+
+      if (policeError) throw policeError;
+
+      return {
+        identityUrl: identityData.path,
+        policeUrl: policeData.path
+      };
+    } finally {
+      setUploadingDocs(false);
+    }
+  };
+
+  const handleFileChange = (file: File | null, type: 'identity' | 'police') => {
+    if (file) {
+      // Validate file size (50MB max)
+      if (file.size > 50 * 1024 * 1024) {
+        toast({
+          title: "Archivo muy grande",
+          description: "El archivo no puede superar los 50MB",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      // Validate file type
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'application/pdf'];
+      if (!allowedTypes.includes(file.type)) {
+        toast({
+          title: "Tipo de archivo inválido",
+          description: "Solo se permiten imágenes (JPG, PNG, WebP) y PDF",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (type === 'identity') {
+        setIdentityDocument(file);
+      } else {
+        setPoliceCertificate(file);
+      }
+
+      toast({
+        title: "Archivo cargado",
+        description: `${file.name} ha sido seleccionado correctamente`,
+      });
     }
   };
 
@@ -380,6 +484,109 @@ const RegisterProfessional = () => {
                 </CardContent>
               </Card>
 
+              {/* Verification Documents */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Shield className="h-5 w-5" />
+                    Documentos de Verificación
+                  </CardTitle>
+                  <div className="flex items-start gap-2 mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                    <AlertCircle className="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                    <div className="text-sm text-blue-800">
+                      <p className="font-medium mb-1">Documentos requeridos para verificación:</p>
+                      <ul className="space-y-1">
+                        <li>• Documento de identidad (cédula o pasaporte)</li>
+                        <li>• Carta de buena conducta de la Policía Nacional RD</li>
+                      </ul>
+                      <p className="mt-2 text-xs">
+                        Estos documentos son para uso interno de Doméstiko y garantizan la seguridad de nuestros usuarios.
+                      </p>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  {/* Identity Document Upload */}
+                  <div>
+                    <Label htmlFor="identityDocument" className="flex items-center gap-2 mb-2">
+                      <FileText className="h-4 w-4" />
+                      Documento de Identidad *
+                    </Label>
+                    <div className="border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary transition-colors">
+                      <input
+                        id="identityDocument"
+                        type="file"
+                        accept="image/*,.pdf"
+                        onChange={(e) => handleFileChange(e.target.files?.[0] || null, 'identity')}
+                        className="hidden"
+                      />
+                      <label htmlFor="identityDocument" className="cursor-pointer">
+                        <Upload className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
+                        <p className="text-sm font-medium">
+                          {identityDocument ? identityDocument.name : "Cargar documento de identidad"}
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          PNG, JPG, WebP o PDF (máx. 50MB)
+                        </p>
+                      </label>
+                    </div>
+                    {identityDocument && (
+                      <div className="flex items-center gap-2 mt-2 text-sm text-green-600">
+                        <CheckCircle className="h-4 w-4" />
+                        <span>Documento cargado correctamente</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Police Certificate Upload */}
+                  <div>
+                    <Label htmlFor="policeCertificate" className="flex items-center gap-2 mb-2">
+                      <Shield className="h-4 w-4" />
+                      Carta de Buena Conducta *
+                    </Label>
+                    <div className="border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary transition-colors">
+                      <input
+                        id="policeCertificate"
+                        type="file"
+                        accept="image/*,.pdf"
+                        onChange={(e) => handleFileChange(e.target.files?.[0] || null, 'police')}
+                        className="hidden"
+                      />
+                      <label htmlFor="policeCertificate" className="cursor-pointer">
+                        <Upload className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
+                        <p className="text-sm font-medium">
+                          {policeCertificate ? policeCertificate.name : "Cargar carta de buena conducta"}
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          PNG, JPG, WebP o PDF (máx. 50MB)
+                        </p>
+                      </label>
+                    </div>
+                    {policeCertificate && (
+                      <div className="flex items-center gap-2 mt-2 text-sm text-green-600">
+                        <CheckCircle className="h-4 w-4" />
+                        <span>Carta cargada correctamente</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                    <div className="flex items-start gap-2">
+                      <AlertCircle className="h-4 w-4 text-yellow-600 mt-0.5 flex-shrink-0" />
+                      <div className="text-sm text-yellow-800">
+                        <p className="font-medium">Información importante:</p>
+                        <ul className="mt-1 space-y-1">
+                          <li>• Los documentos deben estar vigentes y ser legibles</li>
+                          <li>• La carta de buena conducta debe ser emitida por la Policía Nacional</li>
+                          <li>• El proceso de verificación puede tomar 2-5 días hábiles</li>
+                          <li>• Una vez verificado, recibirás el check mark de verificación</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
               {/* Services */}
               <Card>
                 <CardHeader>
@@ -523,6 +730,10 @@ const RegisterProfessional = () => {
                       <CheckCircle className={`h-4 w-4 ${selectedServices.length > 0 ? 'text-green-500' : 'text-muted-foreground'}`} />
                       <span>Servicios ({selectedServices.length})</span>
                     </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className={`h-4 w-4 ${identityDocument && policeCertificate ? 'text-green-500' : 'text-muted-foreground'}`} />
+                      <span>Documentos de verificación</span>
+                    </div>
                   </div>
 
                   <div className="border-t pt-4">
@@ -537,9 +748,9 @@ const RegisterProfessional = () => {
                   <Button 
                     type="submit" 
                     className="w-full" 
-                    disabled={submitting || selectedServices.length === 0}
+                    disabled={submitting || selectedServices.length === 0 || !identityDocument || !policeCertificate}
                   >
-                    {submitting ? "Enviando..." : "Enviar Solicitud"}
+                    {submitting ? (uploadingDocs ? "Subiendo documentos..." : "Enviando...") : "Enviar Solicitud"}
                   </Button>
 
                   <p className="text-xs text-muted-foreground text-center">

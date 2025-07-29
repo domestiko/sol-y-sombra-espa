@@ -131,6 +131,62 @@ export type Database = {
           },
         ]
       }
+      professional_verifications: {
+        Row: {
+          admin_notes: string | null
+          created_at: string
+          id: string
+          identity_document_url: string | null
+          identity_verified: boolean | null
+          overall_verified: boolean | null
+          police_certificate_url: string | null
+          police_verified: boolean | null
+          professional_id: string
+          rejection_reason: string | null
+          updated_at: string
+          verified_at: string | null
+          verified_by: string | null
+        }
+        Insert: {
+          admin_notes?: string | null
+          created_at?: string
+          id?: string
+          identity_document_url?: string | null
+          identity_verified?: boolean | null
+          overall_verified?: boolean | null
+          police_certificate_url?: string | null
+          police_verified?: boolean | null
+          professional_id: string
+          rejection_reason?: string | null
+          updated_at?: string
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Update: {
+          admin_notes?: string | null
+          created_at?: string
+          id?: string
+          identity_document_url?: string | null
+          identity_verified?: boolean | null
+          overall_verified?: boolean | null
+          police_certificate_url?: string | null
+          police_verified?: boolean | null
+          professional_id?: string
+          rejection_reason?: string | null
+          updated_at?: string
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "professional_verifications_professional_id_fkey"
+            columns: ["professional_id"]
+            isOneToOne: false
+            referencedRelation: "professionals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       professionals: {
         Row: {
           available: boolean | null
@@ -289,7 +345,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_professional_verified: {
+        Args: { prof_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never

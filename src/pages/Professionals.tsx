@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
-import { Star, MapPin, Phone, Mail, Search, Filter } from 'lucide-react';
+import { Star, MapPin, Phone, Mail, Search, Filter, CheckCircle } from 'lucide-react';
 
 interface Professional {
   id: string;
@@ -18,6 +18,7 @@ interface Professional {
   hourly_rate: number;
   city: string;
   avatar_url: string;
+  verified: boolean;
   professional_services: {
     title: string;
     service_categories: {
@@ -185,8 +186,16 @@ const Professionals = () => {
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <CardTitle className="text-lg">{professional.full_name}</CardTitle>
-                      <CardDescription className="flex items-center gap-1 mt-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <CardTitle className="text-lg">{professional.full_name}</CardTitle>
+                        {professional.verified && (
+                          <div className="flex items-center gap-1 bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">
+                            <CheckCircle className="h-3 w-3" />
+                            <span>Verificado</span>
+                          </div>
+                        )}
+                      </div>
+                      <CardDescription className="flex items-center gap-1">
                         <MapPin className="h-3 w-3" />
                         {professional.city}
                       </CardDescription>
