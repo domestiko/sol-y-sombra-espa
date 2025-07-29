@@ -7,12 +7,30 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
-import { Home, Mail, Lock, User } from 'lucide-react';
+import { usePasswordValidation } from '@/hooks/usePasswordValidation';
+import { PasswordStrength } from '@/components/ui/password-strength';
+import { Home, Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
 
 const Auth = () => {
   const { user, signIn, signUp } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+
+  // Sign In Form State
+  const [signInEmail, setSignInEmail] = useState('');
+  const [signInPassword, setSignInPassword] = useState('');
+  const [showSignInPassword, setShowSignInPassword] = useState(false);
+
+  // Sign Up Form State
+  const [signUpEmail, setSignUpEmail] = useState('');
+  const [signUpPassword, setSignUpPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [showSignUpPassword, setShowSignUpPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  // Password validation
+  const passwordValidation = usePasswordValidation(signUpPassword);
 
   // Redirigir si ya está autenticado
   if (user) {
@@ -21,19 +39,27 @@ const Auth = () => {
 
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    if (!signInEmail || !signInPassword) {
+      toast({
+        title: "Error",
+        description: "Por favor completa todos los campos",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setLoading(true);
 
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-
     try {
-      const { error } = await signIn(email, password);
+      const { error } = await signIn(signInEmail, signInPassword);
       
       if (error) {
         toast({
-          title: "Error al iniciar sesión",
-          description: error.message,
+          title: "Error de autenticación",
+          description: error.message === "Invalid login credentials" 
+            ? "Email o contraseña incorrectos" 
+            : error.message,
           variant: "destructive",
         });
       } else {
@@ -55,22 +81,53 @@ const Auth = () => {
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    if (!signUpEmail || !signUpPassword || !confirmPassword || !fullName) {
+      toast({
+        title: "Error",
+        description: "Por favor completa todos los campos",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!passwordValidation.isValid) {
+      toast({
+        title: "Contraseña insegura",
+        description: "La contraseña no cumple con todos los requisitos de seguridad",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (signUpPassword !== confirmPassword) {
+      toast({
+        title: "Error",
+        description: "Las contraseñas no coinciden",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setLoading(true);
 
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-    const fullName = formData.get('fullName') as string;
-
     try {
-      const { error } = await signUp(email, password, fullName);
+      const { error } = await signUp(signUpEmail, signUpPassword, fullName);
       
       if (error) {
-        toast({
-          title: "Error al registrarse",
-          description: error.message,
-          variant: "destructive",
-        });
+        if (error.message.includes("already registered")) {
+          toast({
+            title: "Usuario ya registrado",
+            description: "Este email ya está registrado. Intenta iniciar sesión.",
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Error de registro",
+            description: error.message,
+            variant: "destructive",
+          });
+        }
       } else {
         toast({
           title: "¡Registro exitoso!",
@@ -108,7 +165,7 @@ const Auth = () => {
           <CardHeader>
             <CardTitle>Acceso a tu cuenta</CardTitle>
             <CardDescription>
-              Inicia sesión o crea una cuenta nueva
+              Inicia sesión o crea una cuenta nueva con contraseña segura
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -126,10 +183,11 @@ const Auth = () => {
                       <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="signin-email"
-                        name="email"
                         type="email"
                         placeholder="tu@email.com"
                         className="pl-10"
+                        value={signInEmail}
+                        onChange={(e) => setSignInEmail(e.target.value)}
                         required
                       />
                     </div>
@@ -140,12 +198,20 @@ const Auth = () => {
                       <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="signin-password"
-                        name="password"
-                        type="password"
+                        type={showSignInPassword ? "text" : "password"}
                         placeholder="Tu contraseña"
-                        className="pl-10"
+                        className="pl-10 pr-10"
+                        value={signInPassword}
+                        onChange={(e) => setSignInPassword(e.target.value)}
                         required
                       />
+                      <button
+                        type="button"
+                        onClick={() => setShowSignInPassword(!showSignInPassword)}
+                        className="absolute right-3 top-3 text-muted-foreground hover:text-foreground"
+                      >
+                        {showSignInPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
                     </div>
                   </div>
                   <Button type="submit" className="w-full" disabled={loading}>
@@ -162,10 +228,11 @@ const Auth = () => {
                       <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="signup-name"
-                        name="fullName"
                         type="text"
                         placeholder="Tu nombre completo"
                         className="pl-10"
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
                         required
                       />
                     </div>
@@ -176,10 +243,11 @@ const Auth = () => {
                       <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="signup-email"
-                        name="email"
                         type="email"
                         placeholder="tu@email.com"
                         className="pl-10"
+                        value={signUpEmail}
+                        onChange={(e) => setSignUpEmail(e.target.value)}
                         required
                       />
                     </div>
@@ -190,17 +258,61 @@ const Auth = () => {
                       <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="signup-password"
-                        name="password"
-                        type="password"
-                        placeholder="Mínimo 6 caracteres"
-                        className="pl-10"
-                        minLength={6}
+                        type={showSignUpPassword ? "text" : "password"}
+                        placeholder="Crea una contraseña segura"
+                        className="pl-10 pr-10"
+                        value={signUpPassword}
+                        onChange={(e) => setSignUpPassword(e.target.value)}
                         required
                       />
+                      <button
+                        type="button"
+                        onClick={() => setShowSignUpPassword(!showSignUpPassword)}
+                        className="absolute right-3 top-3 text-muted-foreground hover:text-foreground"
+                      >
+                        {showSignUpPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
                     </div>
+                    <PasswordStrength validation={passwordValidation} password={signUpPassword} />
                   </div>
-                  <Button type="submit" className="w-full" disabled={loading}>
-                    {loading ? "Creando cuenta..." : "Crear Cuenta"}
+                  <div className="space-y-2">
+                    <Label htmlFor="confirm-password">Confirmar contraseña</Label>
+                    <div className="relative">
+                      <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                      <Input
+                        id="confirm-password"
+                        type={showConfirmPassword ? "text" : "password"}
+                        placeholder="Confirma tu contraseña"
+                        className="pl-10 pr-10"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        required
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        className="absolute right-3 top-3 text-muted-foreground hover:text-foreground"
+                      >
+                        {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
+                    </div>
+                    {confirmPassword && signUpPassword !== confirmPassword && (
+                      <p className="text-sm text-red-500 flex items-center gap-2">
+                        <span>❌ Las contraseñas no coinciden</span>
+                      </p>
+                    )}
+                    {confirmPassword && signUpPassword === confirmPassword && signUpPassword && (
+                      <p className="text-sm text-green-600 flex items-center gap-2">
+                        <span>✅ Las contraseñas coinciden</span>
+                      </p>
+                    )}
+                  </div>
+                  <Button 
+                    type="submit" 
+                    className="w-full" 
+                    disabled={loading || !passwordValidation.isValid || signUpPassword !== confirmPassword}
+                  >
+                    {loading ? "Creando cuenta..." : "Crear Cuenta Segura"}
                   </Button>
                 </form>
               </TabsContent>
