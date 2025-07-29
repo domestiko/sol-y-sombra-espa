@@ -4,6 +4,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
+import { MobileApp } from "@/components/MobileApp";
+import { MobileHeader } from "@/components/MobileHeader";
+import { MobileBottomNav } from "@/components/MobileBottomNav";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
@@ -23,16 +26,22 @@ const App = () => {
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/auth" element={<Auth />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/professionals" element={<Professionals />} />
-              <Route path="/book-service" element={<BookService />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/register-professional" element={<RegisterProfessional />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <MobileApp>
+              <MobileHeader />
+              <div className="pb-16"> {/* Espacio para bottom nav */}
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/auth" element={<Auth />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/professionals" element={<Professionals />} />
+                  <Route path="/book-service" element={<BookService />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/register-professional" element={<RegisterProfessional />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </div>
+              <MobileBottomNav />
+            </MobileApp>
           </BrowserRouter>
         </TooltipProvider>
       </AuthProvider>

@@ -19,6 +19,10 @@ const config: CapacitorConfig = {
       androidScaleType: "CENTER_CROP",
       iosFadeOutDuration: 500
     },
+    StatusBar: {
+      style: 'DARK',
+      backgroundColor: '#3b82f6'
+    }
   },
   ios: {
     scheme: 'Doméstiko',

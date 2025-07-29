@@ -125,4 +125,37 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Estilos móviles nativos */
+  .mobile-app {
+    @apply overflow-x-hidden;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Safe area para notch y barras del sistema */
+  .pt-safe-area-inset-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .pb-safe-area-inset-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Ocultar scrollbars en móvil */
+  .mobile-app ::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-app {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Mejorar el toque en móvil */
+  .mobile-app button, .mobile-app a {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
 }
