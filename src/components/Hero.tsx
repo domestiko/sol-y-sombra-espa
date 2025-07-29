@@ -75,68 +75,113 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Ilustraciones decorativas de servicios */}
+      {/* Ilustraciones modernas y sofisticadas */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Herramientas de plomería */}
-        <div className="absolute top-20 left-20 opacity-10">
-          <svg width="120" height="120" viewBox="0 0 120 120" className="text-blue-500">
-            <circle cx="60" cy="60" r="8" fill="currentColor"/>
-            <rect x="55" y="20" width="10" height="80" fill="currentColor" rx="5"/>
-            <rect x="40" y="55" width="40" height="10" fill="currentColor" rx="5"/>
+        {/* Patrón geométrico de servicios - Top Left */}
+        <div className="absolute top-16 left-16 opacity-8">
+          <svg width="180" height="180" viewBox="0 0 180 180" className="text-blue-600">
+            <defs>
+              <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style={{stopColor:'currentColor', stopOpacity:0.6}} />
+                <stop offset="100%" style={{stopColor:'currentColor', stopOpacity:0.2}} />
+              </linearGradient>
+            </defs>
+            {/* Estructura arquitectónica moderna */}
+            <path d="M40 60 L90 20 L140 60 L140 120 L90 140 L40 120 Z" fill="url(#grad1)" stroke="currentColor" strokeWidth="1" opacity="0.4"/>
+            <path d="M60 80 L90 60 L120 80 L120 110 L90 120 L60 110 Z" fill="currentColor" opacity="0.3"/>
+            <rect x="85" y="50" width="10" height="40" fill="currentColor" opacity="0.8"/>
+            <rect x="70" y="70" width="8" height="30" fill="currentColor" opacity="0.6"/>
+            <rect x="102" y="70" width="8" height="30" fill="currentColor" opacity="0.6"/>
           </svg>
         </div>
         
-        {/* Herramientas eléctricas */}
-        <div className="absolute top-40 right-20 opacity-10">
-          <svg width="100" height="100" viewBox="0 0 100 100" className="text-yellow-500">
-            <path d="M30 10 L70 50 L50 50 L70 90 L30 50 L50 50 Z" fill="currentColor"/>
+        {/* Patrón tecnológico - Top Right */}
+        <div className="absolute top-32 right-20 opacity-8">
+          <svg width="160" height="160" viewBox="0 0 160 160" className="text-indigo-600">
+            <defs>
+              <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style={{stopColor:'currentColor', stopOpacity:0.7}} />
+                <stop offset="100%" style={{stopColor:'currentColor', stopOpacity:0.2}} />
+              </linearGradient>
+            </defs>
+            {/* Circuitos modernos */}
+            <circle cx="80" cy="80" r="60" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.3"/>
+            <circle cx="80" cy="80" r="40" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.4"/>
+            <path d="M80 40 L100 60 L80 80 L60 60 Z" fill="url(#grad2)"/>
+            <circle cx="80" cy="80" r="12" fill="currentColor" opacity="0.8"/>
+            <rect x="78" y="20" width="4" height="20" fill="currentColor" opacity="0.6"/>
+            <rect x="78" y="120" width="4" height="20" fill="currentColor" opacity="0.6"/>
+            <rect x="20" y="78" width="20" height="4" fill="currentColor" opacity="0.6"/>
+            <rect x="120" y="78" width="20" height="4" fill="currentColor" opacity="0.6"/>
           </svg>
         </div>
         
-        {/* Elementos de jardinería */}
-        <div className="absolute bottom-32 left-32 opacity-10">
-          <svg width="80" height="80" viewBox="0 0 80 80" className="text-green-500">
-            <circle cx="40" cy="25" r="15" fill="currentColor"/>
-            <rect x="37" y="35" width="6" height="30" fill="currentColor"/>
-            <ellipse cx="40" cy="70" rx="20" ry="8" fill="currentColor"/>
+        {/* Elementos isométricos - Bottom Left */}
+        <div className="absolute bottom-24 left-24 opacity-8">
+          <svg width="140" height="140" viewBox="0 0 140 140" className="text-emerald-600">
+            <defs>
+              <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style={{stopColor:'currentColor', stopOpacity:0.6}} />
+                <stop offset="100%" style={{stopColor:'currentColor', stopOpacity:0.3}} />
+              </linearGradient>
+            </defs>
+            {/* Cubos isométricos */}
+            <path d="M40 80 L70 60 L100 80 L70 100 Z" fill="url(#grad3)"/>
+            <path d="M70 60 L100 80 L100 50 L70 30 Z" fill="currentColor" opacity="0.5"/>
+            <path d="M40 80 L70 100 L70 70 L40 50 Z" fill="currentColor" opacity="0.4"/>
+            <path d="M60 95 L80 85 L100 95 L80 105 Z" fill="currentColor" opacity="0.3"/>
+            <path d="M50 70 L65 60 L80 70 L65 80 Z" fill="currentColor" opacity="0.4"/>
           </svg>
         </div>
         
-        {/* Elementos de limpieza */}
-        <div className="absolute bottom-20 right-40 opacity-10">
-          <svg width="90" height="90" viewBox="0 0 90 90" className="text-purple-500">
-            <circle cx="45" cy="20" r="12" fill="currentColor"/>
-            <rect x="42" y="30" width="6" height="40" fill="currentColor"/>
-            <path d="M20 65 Q45 55 70 65 Q45 75 20 65" fill="currentColor"/>
+        {/* Patrón abstracto - Bottom Right */}
+        <div className="absolute bottom-32 right-32 opacity-8">
+          <svg width="120" height="120" viewBox="0 0 120 120" className="text-purple-600">
+            <defs>
+              <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style={{stopColor:'currentColor', stopOpacity:0.7}} />
+                <stop offset="100%" style={{stopColor:'currentColor', stopOpacity:0.2}} />
+              </linearGradient>
+            </defs>
+            {/* Formas geométricas fluidas */}
+            <path d="M20 60 Q40 20 80 40 Q100 60 80 80 Q60 100 20 80 Q10 70 20 60" fill="url(#grad4)"/>
+            <path d="M40 60 Q55 45 70 60 Q55 75 40 60" fill="currentColor" opacity="0.6"/>
+            <circle cx="60" cy="60" r="15" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.5"/>
+            <circle cx="60" cy="60" r="8" fill="currentColor" opacity="0.4"/>
           </svg>
         </div>
         
-        {/* Herramientas de pintura */}
-        <div className="absolute top-60 left-10 opacity-10">
-          <svg width="70" height="70" viewBox="0 0 70 70" className="text-orange-500">
-            <rect x="30" y="10" width="10" height="40" fill="currentColor" rx="2"/>
-            <rect x="25" y="45" width="20" height="15" fill="currentColor" rx="3"/>
+        {/* Elementos lineales modernos - Middle */}
+        <div className="absolute top-1/2 left-10 opacity-6">
+          <svg width="100" height="200" viewBox="0 0 100 200" className="text-slate-500">
+            <path d="M20 0 L80 50 L20 100 L80 150 L20 200" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.3"/>
+            <path d="M40 0 L60 25 L40 50 L60 75 L40 100" stroke="currentColor" strokeWidth="1" fill="none" opacity="0.4"/>
           </svg>
         </div>
         
-        {/* Engranajes técnicos */}
-        <div className="absolute top-32 right-60 opacity-10">
-          <svg width="60" height="60" viewBox="0 0 60 60" className="text-gray-500">
-            <circle cx="30" cy="30" r="25" fill="none" stroke="currentColor" strokeWidth="4"/>
-            <circle cx="30" cy="30" r="8" fill="currentColor"/>
-            <rect x="28" y="5" width="4" height="10" fill="currentColor"/>
-            <rect x="28" y="45" width="4" height="10" fill="currentColor"/>
-            <rect x="5" y="28" width="10" height="4" fill="currentColor"/>
-            <rect x="45" y="28" width="10" height="4" fill="currentColor"/>
+        <div className="absolute top-16 right-60 opacity-6">
+          <svg width="200" height="100" viewBox="0 0 200 100" className="text-slate-500">
+            <path d="M0 20 L50 80 L100 20 L150 80 L200 20" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.3"/>
+            <path d="M0 40 L25 60 L50 40 L75 60 L100 40" stroke="currentColor" strokeWidth="1" fill="none" opacity="0.4"/>
           </svg>
         </div>
       </div>
 
-      {/* Patrón de fondo geométrico */}
+      {/* Fondo con patrones geométricos sutiles */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-primary rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-blue-200 to-indigo-200 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96">
+          <svg width="100%" height="100%" viewBox="0 0 400 400" className="text-primary">
+            <defs>
+              <pattern id="hexagons" x="0" y="0" width="60" height="52" patternUnits="userSpaceOnUse">
+                <path d="M30 0 L52 15 L52 37 L30 52 L8 37 L8 15 Z" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.1"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#hexagons)"/>
+          </svg>
+        </div>
+        
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-blue-200/20 to-indigo-200/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-purple-200/20 to-pink-200/20 rounded-full blur-3xl" />
       </div>
     </section>
   );

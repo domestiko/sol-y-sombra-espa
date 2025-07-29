@@ -85,31 +85,64 @@ const Testimonials = () => {
           </div>
         </div>
 
-        {/* Ilustraciones de confianza y satisfacción */}
+        {/* Ilustraciones profesionales de satisfacción del cliente */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-10 opacity-8">
-            <svg width="120" height="120" viewBox="0 0 120 120" className="text-yellow-400">
-              {/* Estrellas de calificación */}
-              <path d="M60 10 L67 37 L95 37 L73 53 L80 80 L60 64 L40 80 L47 53 L25 37 L53 37 Z" fill="currentColor" opacity="0.4"/>
-              <circle cx="60" cy="60" r="35" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.3"/>
+          <div className="absolute top-16 left-16 opacity-6">
+            <svg width="160" height="160" viewBox="0 0 160 160" className="text-amber-500">
+              <defs>
+                <linearGradient id="testimonialGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style={{stopColor:'currentColor', stopOpacity:0.8}} />
+                  <stop offset="100%" style={{stopColor:'currentColor', stopOpacity:0.2}} />
+                </linearGradient>
+              </defs>
+              {/* Sistema de calificación moderno */}
+              <circle cx="80" cy="80" r="60" fill="url(#testimonialGrad1)"/>
+              <path d="M80 40 L90 65 L115 65 L95 82 L105 107 L80 90 L55 107 L65 82 L45 65 L70 65 Z" fill="white" opacity="0.9"/>
+              <circle cx="80" cy="80" r="45" fill="none" stroke="currentColor" strokeWidth="3" opacity="0.4"/>
+              <circle cx="80" cy="80" r="30" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.3"/>
             </svg>
           </div>
           
-          <div className="absolute bottom-10 right-15 opacity-8">
-            <svg width="100" height="100" viewBox="0 0 100 100" className="text-rose-400">
-              {/* Corazón de satisfacción */}
-              <path d="M50 85 C20 60, 10 30, 25 20 C35 15, 45 20, 50 30 C55 20, 65 15, 75 20 C90 30, 80 60, 50 85" fill="currentColor" opacity="0.4"/>
+          <div className="absolute bottom-16 right-20 opacity-6">
+            <svg width="140" height="140" viewBox="0 0 140 140" className="text-rose-500">
+              <defs>
+                <linearGradient id="testimonialGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style={{stopColor:'currentColor', stopOpacity:0.7}} />
+                  <stop offset="100%" style={{stopColor:'currentColor', stopOpacity:0.2}} />
+                </linearGradient>
+              </defs>
+              {/* Elemento de satisfacción */}
+              <path d="M70 25 C85 15, 105 25, 115 45 C115 65, 95 85, 70 100 C45 85, 25 65, 25 45 C25 25, 45 15, 70 25" fill="url(#testimonialGrad2)"/>
+              <circle cx="70" cy="70" r="40" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.4"/>
+              <path d="M55 60 Q70 75 85 60" stroke="white" strokeWidth="4" fill="none"/>
+              <circle cx="58" cy="55" r="3" fill="white"/>
+              <circle cx="82" cy="55" r="3" fill="white"/>
             </svg>
           </div>
           
-          <div className="absolute top-1/2 right-10 opacity-8">
-            <svg width="80" height="80" viewBox="0 0 80 80" className="text-green-400">
-              {/* Burbujas de chat */}
-              <ellipse cx="40" cy="35" rx="30" ry="20" fill="currentColor" opacity="0.3"/>
-              <ellipse cx="50" cy="55" rx="20" ry="15" fill="currentColor" opacity="0.4"/>
-              <circle cx="35" cy="30" r="3" fill="currentColor"/>
-              <circle cx="40" cy="30" r="3" fill="currentColor"/>
-              <circle cx="45" cy="30" r="3" fill="currentColor"/>
+          <div className="absolute top-1/2 right-16 opacity-5">
+            <svg width="120" height="200" viewBox="0 0 120 200" className="text-emerald-500">
+              <defs>
+                <linearGradient id="testimonialGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" style={{stopColor:'currentColor', stopOpacity:0.6}} />
+                  <stop offset="100%" style={{stopColor:'currentColor', stopOpacity:0.1}} />
+                </linearGradient>
+              </defs>
+              {/* Burbujas de comunicación */}
+              <ellipse cx="60" cy="40" rx="35" ry="25" fill="url(#testimonialGrad3)"/>
+              <ellipse cx="60" cy="100" rx="30" ry="20" fill="currentColor" opacity="0.4"/>
+              <ellipse cx="60" cy="160" rx="25" ry="15" fill="currentColor" opacity="0.3"/>
+              <path d="M60 65 Q70 75 60 85" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.5"/>
+              <path d="M60 125 Q70 135 60 145" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.4"/>
+            </svg>
+          </div>
+          
+          <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 opacity-4">
+            <svg width="200" height="80" viewBox="0 0 200 80" className="text-purple-500">
+              <path d="M0 40 Q50 20 100 40 Q150 60 200 40" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.3"/>
+              <circle cx="50" cy="35" r="4" fill="currentColor" opacity="0.6"/>
+              <circle cx="100" cy="40" r="4" fill="currentColor" opacity="0.6"/>
+              <circle cx="150" cy="45" r="4" fill="currentColor" opacity="0.6"/>
             </svg>
           </div>
         </div>

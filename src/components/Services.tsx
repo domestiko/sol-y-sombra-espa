@@ -103,44 +103,75 @@ const Services = () => {
         </div>
       </div>
 
-      {/* Ilustraciones decorativas por toda la sección */}
+      {/* Ilustraciones profesionales y modernas */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Elementos de servicios distribuidos */}
-        <div className="absolute top-10 right-10 opacity-8">
-          <svg width="150" height="150" viewBox="0 0 150 150" className="text-blue-400">
-            {/* Casa con herramientas */}
-            <rect x="40" y="80" width="70" height="50" fill="currentColor" opacity="0.3" rx="5"/>
-            <path d="M30 80 L75 40 L120 80" fill="none" stroke="currentColor" strokeWidth="4" opacity="0.5"/>
-            <circle cx="90" cy="100" r="8" fill="currentColor"/>
-            <rect x="85" y="60" width="10" height="50" fill="currentColor" rx="2"/>
+        {/* Arquitectura de servicios - Top Right */}
+        <div className="absolute top-16 right-16 opacity-6">
+          <svg width="200" height="200" viewBox="0 0 200 200" className="text-indigo-600">
+            <defs>
+              <linearGradient id="serviceGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style={{stopColor:'currentColor', stopOpacity:0.8}} />
+                <stop offset="100%" style={{stopColor:'currentColor', stopOpacity:0.2}} />
+              </linearGradient>
+            </defs>
+            {/* Estructura de servicios interconectados */}
+            <polygon points="100,20 160,60 160,140 100,180 40,140 40,60" fill="url(#serviceGrad1)" opacity="0.4"/>
+            <polygon points="100,40 140,65 140,135 100,160 60,135 60,65" fill="currentColor" opacity="0.3"/>
+            <circle cx="100" cy="100" r="25" fill="currentColor" opacity="0.8"/>
+            <rect x="95" y="50" width="10" height="30" fill="currentColor" opacity="0.6"/>
+            <rect x="95" y="120" width="10" height="30" fill="currentColor" opacity="0.6"/>
+            <rect x="70" y="95" width="30" height="10" fill="currentColor" opacity="0.6"/>
+            <rect x="130" y="95" width="30" height="10" fill="currentColor" opacity="0.6"/>
           </svg>
         </div>
         
-        <div className="absolute bottom-20 left-10 opacity-8">
-          <svg width="120" height="120" viewBox="0 0 120 120" className="text-green-400">
-            {/* Elementos de jardinería */}
-            <circle cx="60" cy="30" r="20" fill="currentColor" opacity="0.3"/>
-            <rect x="57" y="45" width="6" height="35" fill="currentColor"/>
-            <ellipse cx="60" cy="85" rx="25" ry="10" fill="currentColor" opacity="0.4"/>
-            <path d="M30 20 Q60 10 90 20" stroke="currentColor" strokeWidth="3" fill="none"/>
+        {/* Elementos de conectividad - Bottom Left */}
+        <div className="absolute bottom-20 left-20 opacity-6">
+          <svg width="180" height="180" viewBox="0 0 180 180" className="text-emerald-600">
+            <defs>
+              <linearGradient id="serviceGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style={{stopColor:'currentColor', stopOpacity:0.7}} />
+                <stop offset="100%" style={{stopColor:'currentColor', stopOpacity:0.2}} />
+              </linearGradient>
+            </defs>
+            {/* Red de conexiones */}
+            <circle cx="90" cy="90" r="70" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.3"/>
+            <circle cx="90" cy="90" r="45" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.4"/>
+            <path d="M90 30 L130 70 L90 110 L50 70 Z" fill="url(#serviceGrad2)"/>
+            <circle cx="90" cy="45" r="8" fill="currentColor" opacity="0.8"/>
+            <circle cx="125" cy="90" r="8" fill="currentColor" opacity="0.8"/>
+            <circle cx="90" cy="135" r="8" fill="currentColor" opacity="0.8"/>
+            <circle cx="55" cy="90" r="8" fill="currentColor" opacity="0.8"/>
           </svg>
         </div>
         
-        <div className="absolute top-1/2 left-20 opacity-8">
-          <svg width="100" height="100" viewBox="0 0 100 100" className="text-purple-400">
-            {/* Elementos de limpieza */}
-            <circle cx="50" cy="25" r="15" fill="currentColor" opacity="0.3"/>
-            <rect x="47" y="35" width="6" height="30" fill="currentColor"/>
-            <ellipse cx="50" cy="75" rx="20" ry="8" fill="currentColor" opacity="0.4"/>
+        {/* Patrón tecnológico - Middle */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-4">
+          <svg width="250" height="250" viewBox="0 0 250 250" className="text-purple-600">
+            <defs>
+              <linearGradient id="serviceGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style={{stopColor:'currentColor', stopOpacity:0.6}} />
+                <stop offset="100%" style={{stopColor:'currentColor', stopOpacity:0.1}} />
+              </linearGradient>
+            </defs>
+            {/* Grid tecnológico */}
+            <rect x="50" y="50" width="150" height="150" fill="url(#serviceGrad3)" rx="10"/>
+            <path d="M75 75 L125 75 L125 125 L175 125 L175 175 L125 175 L125 125 L75 125 Z" fill="currentColor" opacity="0.3"/>
+            <circle cx="100" cy="100" r="15" fill="currentColor" opacity="0.6"/>
+            <circle cx="150" cy="150" r="15" fill="currentColor" opacity="0.6"/>
+            <rect x="95" y="70" width="10" height="60" fill="currentColor" opacity="0.4"/>
+            <rect x="145" y="120" width="10" height="60" fill="currentColor" opacity="0.4"/>
           </svg>
         </div>
         
-        <div className="absolute top-20 left-1/2 opacity-8">
-          <svg width="80" height="80" viewBox="0 0 80 80" className="text-orange-400">
-            {/* Herramientas de pintura */}
-            <rect x="35" y="15" width="10" height="35" fill="currentColor" rx="2"/>
-            <rect x="30" y="45" width="20" height="12" fill="currentColor" rx="3"/>
-            <path d="M20 65 Q40 60 60 65" stroke="currentColor" strokeWidth="2" fill="none"/>
+        {/* Elementos abstractos laterales */}
+        <div className="absolute top-20 left-1/3 opacity-5">
+          <svg width="150" height="300" viewBox="0 0 150 300" className="text-blue-500">
+            <path d="M20 0 Q75 50 20 100 Q75 150 20 200 Q75 250 20 300" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.3"/>
+            <path d="M130 0 Q75 50 130 100 Q75 150 130 200 Q75 250 130 300" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.4"/>
+            <circle cx="75" cy="75" r="6" fill="currentColor" opacity="0.6"/>
+            <circle cx="75" cy="150" r="6" fill="currentColor" opacity="0.6"/>
+            <circle cx="75" cy="225" r="6" fill="currentColor" opacity="0.6"/>
           </svg>
         </div>
       </div>
