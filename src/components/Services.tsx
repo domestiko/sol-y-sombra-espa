@@ -50,14 +50,23 @@ const Services = () => {
   return (
     <section className="py-24 bg-gradient-to-br from-indigo-50 via-white to-cyan-50 relative overflow-hidden">
       <div className="container mx-auto px-6">
-        {/* Header */}
-        <div className="text-center mb-16 space-y-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-balance">
-            Servicios para cada necesidad de tu hogar
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-            Profesionales capacitados y verificados listos para resolver cualquier tarea doméstica
-          </p>
+        {/* Header with Image */}
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 mb-16">
+          <div className="lg:w-1/2 space-y-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-balance">
+              Servicios para cada necesidad de tu hogar
+            </h2>
+            <p className="text-lg text-muted-foreground text-balance">
+              Profesionales capacitados y verificados listos para resolver cualquier tarea doméstica
+            </p>
+          </div>
+          <div className="lg:w-1/2 flex justify-center">
+            <img 
+              src="/lovable-uploads/1f936c8a-34dc-4393-9f10-d3ea004c24ac.png" 
+              alt="Equipo de profesionales de servicios domésticos"
+              className="w-80 h-80 object-contain hover:scale-105 transition-transform duration-300"
+            />
+          </div>
         </div>
 
         {/* Services Grid */}
