@@ -40,7 +40,7 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4 text-white">Servicios</h4>
             <ul className="space-y-3">
-              {['Plomería', 'Electricidad', 'Jardinería', 'Limpieza', 'Cuidado Infantil', 'Técnicos'].map((service) => (
+              {["Plomería", "Electricidad", "Jardinería", "Limpieza", "Cuidado Infantil", "Técnicos"].map((service) => (
                 <li key={service}>
                   <a href="#" className="text-gray-300 hover:text-primary transition-colors">
                     {service}
@@ -55,12 +55,12 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4 text-white">Compañía</h4>
             <ul className="space-y-3">
               {[
-                'Acerca de nosotros',
-                'Como funciona',
-                'Ser profesional',
-                'Centro de ayuda',
-                'Términos y condiciones',
-                'Política de privacidad'
+                "Acerca de nosotros",
+                "Como funciona",
+                "Ser profesional",
+                "Centro de ayuda",
+                "Términos y condiciones",
+                "Política de privacidad"
               ].map((item) => (
                 <li key={item}>
                   <a href="#" className="text-gray-300 hover:text-primary transition-colors">
