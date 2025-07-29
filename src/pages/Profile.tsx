@@ -70,11 +70,17 @@ const Profile = () => {
 
   useEffect(() => {
     if (!user) {
+      // En lugar de redirigir inmediatamente, mostrar mensaje
+      toast({
+        title: "Acceso restringido",
+        description: "Debes iniciar sesión para ver tu perfil",
+        variant: "destructive",
+      });
       navigate('/auth');
       return;
     }
     fetchUserData();
-  }, [user, navigate]);
+  }, [user, navigate, toast]);
 
   const fetchUserData = async () => {
     try {
