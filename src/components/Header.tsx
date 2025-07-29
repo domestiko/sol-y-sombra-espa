@@ -41,9 +41,9 @@ const Header = () => {
           <div className="hidden md:flex items-center gap-3">
             {user ? (
               <>
-                <Button variant="ghost" onClick={() => navigate('/dashboard')}>
+                <Button variant="ghost" onClick={() => navigate('/profile')}>
                   <User className="h-4 w-4 mr-2" />
-                  Dashboard
+                  Mi Perfil
                 </Button>
                 <Button variant="ghost" onClick={() => signOut()}>
                   <LogOut className="h-4 w-4 mr-2" />
@@ -95,9 +95,9 @@ const Header = () => {
               <div className="flex flex-col gap-3 pt-4 border-t border-border">
                 {user ? (
                   <>
-                    <Button variant="ghost" className="justify-start" onClick={() => { navigate('/dashboard'); setIsMenuOpen(false); }}>
+                    <Button variant="ghost" className="justify-start" onClick={() => { navigate('/profile'); setIsMenuOpen(false); }}>
                       <User className="h-4 w-4 mr-2" />
-                      Dashboard
+                      Mi Perfil
                     </Button>
                     <Button variant="ghost" className="justify-start" onClick={() => { signOut(); setIsMenuOpen(false); }}>
                       <LogOut className="h-4 w-4 mr-2" />

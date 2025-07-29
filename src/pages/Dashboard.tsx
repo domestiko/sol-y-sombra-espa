@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from '@/hooks/useAuth';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -8,6 +8,7 @@ import { Calendar, MapPin, Star, Clock, User, Settings, LogOut } from 'lucide-re
 
 const Dashboard = () => {
   const { user, signOut } = useAuth();
+  const navigate = useNavigate();
 
   if (!user) {
     return <Navigate to="/auth" replace />;
@@ -171,7 +172,10 @@ const Dashboard = () => {
                 </CardHeader>
               </Card>
 
-              <Card className="cursor-pointer hover:shadow-md transition-shadow">
+              <Card 
+                className="cursor-pointer hover:shadow-md transition-shadow"
+                onClick={() => navigate('/profile')}
+              >
                 <CardHeader>
                   <CardTitle className="text-base">Configurar Perfil</CardTitle>
                   <CardDescription>
