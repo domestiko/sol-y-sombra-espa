@@ -12,6 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { CalendarIcon, MapPin, Clock, DollarSign, ArrowLeft } from "lucide-react";
+import { PaymentModal } from "@/components/PaymentModal";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
@@ -50,6 +51,10 @@ const BookService = () => {
   const [city, setCity] = useState("");
   const [phone, setPhone] = useState("");
   const [estimatedHours, setEstimatedHours] = useState("");
+  
+  // Payment modal state
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [createdBooking, setCreatedBooking] = useState<any>(null);
 
   useEffect(() => {
     if (!user) {
@@ -151,7 +156,7 @@ const BookService = () => {
         ? selectedProf.hourly_rate * parseFloat(estimatedHours)
         : null;
 
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('bookings')
         .insert({
           user_id: user.id,
@@ -166,16 +171,18 @@ const BookService = () => {
           estimated_hours: estimatedHours ? parseFloat(estimatedHours) : null,
           total_price: totalPrice,
           status: 'pending'
-        });
+        })
+        .select()
+        .single();
 
       if (error) throw error;
 
-      toast({
-        title: "¡Solicitud enviada!",
-        description: "Tu solicitud de servicio ha sido enviada. El profesional se pondrá en contacto contigo pronto.",
+      // Set created booking and show payment modal
+      setCreatedBooking({
+        ...data,
+        professional: selectedProf
       });
-
-      navigate('/dashboard');
+      setShowPaymentModal(true);
     } catch (error) {
       console.error('Error creating booking:', error);
       toast({
@@ -186,6 +193,14 @@ const BookService = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handlePaymentSuccess = () => {
+    toast({
+      title: "Booking confirmado",
+      description: "Tu solicitud ha sido procesada exitosamente",
+    });
+    navigate('/dashboard');
   };
 
   const selectedProf = professionals.find(p => p.id === selectedProfessional);
@@ -431,6 +446,15 @@ const BookService = () => {
             </div>
           </div>
         </form>
+
+        {createdBooking && (
+          <PaymentModal
+            isOpen={showPaymentModal}
+            onClose={() => setShowPaymentModal(false)}
+            booking={createdBooking}
+            onPaymentSuccess={handlePaymentSuccess}
+          />
+        )}
       </div>
     </div>
   );
