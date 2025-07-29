@@ -59,7 +59,7 @@ const Hero = () => {
                 size="lg" 
                 variant="outline"
                 onClick={() => navigate('/register-professional')}
-                className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm text-base md:text-lg px-6 md:px-8 py-3 md:py-4 h-auto font-semibold"
+                className="border-white/30 bg-white/10 text-primary hover:bg-white/20 backdrop-blur-sm text-base md:text-lg px-6 md:px-8 py-3 md:py-4 h-auto font-semibold"
               >
                 Soy Profesional
                 <Users className="ml-2 h-4 w-4 md:h-5 md:w-5" />
