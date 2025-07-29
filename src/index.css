@@ -5,44 +5,53 @@
 /* Doméstiko Minimalista - Sistema de Diseño Limpio */
 
 @layer base {
+  /* Paleta de colores basada en la imagen de profesionales */
   :root {
-    /* Fondo moderno con gradiente sutil */
-    --background: 240 10% 98%;
-    --foreground: 0 0% 9%;
+    /* Colores principales inspirados en la imagen */
+    --background: 185 20% 96%;
+    --foreground: 210 40% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 9%;
+    --card-foreground: 210 40% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 9%;
+    --popover-foreground: 210 40% 15%;
 
-    /* Primario: Azul limpio y confiable */
-    --primary: 221 83% 53%;
+    /* Turquesa principal de la imagen */
+    --primary: 185 70% 45%;
     --primary-foreground: 0 0% 98%;
+    --primary-hover: 185 70% 40%;
 
-    /* Secundario: Gris elegante */
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 9%;
+    /* Verde azulado secundario */
+    --secondary: 175 45% 75%;
+    --secondary-foreground: 175 50% 25%;
+    --secondary-hover: 175 45% 70%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 185 15% 92%;
+    --muted-foreground: 210 25% 45%;
 
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 9%;
+    /* Amarillo cálido del casco */
+    --accent: 45 95% 65%;
+    --accent-foreground: 45 95% 15%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 85% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 91%;
-    --input: 0 0% 91%;
-    --ring: 221 83% 53%;
+    --border: 185 20% 85%;
+    --input: 185 20% 85%;
+    --ring: 185 70% 45%;
 
-    --radius: 8px;
+    --radius: 12px;
 
-    /* Sombras sutiles */
-    --shadow-sm: 0 1px 3px hsl(0 0% 0% / 0.05);
-    --shadow-md: 0 4px 12px hsl(0 0% 0% / 0.08);
-    --shadow-lg: 0 8px 25px hsl(0 0% 0% / 0.12);
+    /* Gradientes temáticos inspirados en la imagen */
+    --gradient-primary: linear-gradient(135deg, hsl(185 70% 45%), hsl(175 60% 55%));
+    --gradient-hero: linear-gradient(135deg, hsl(185 70% 45%) 0%, hsl(175 60% 55%) 50%, hsl(45 95% 65%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(185 15% 98%) 100%);
+
+    /* Sombras con colores temáticos */
+    --shadow-soft: 0 2px 8px hsl(185 70% 45% / 0.1);
+    --shadow-card: 0 4px 16px hsl(185 70% 45% / 0.15);
+    --shadow-floating: 0 8px 32px hsl(185 70% 45% / 0.2);
 
     /* Espaciado consistente */
     --spacing-xs: 0.25rem;
@@ -53,23 +62,42 @@
   }
 
   .dark {
-    --background: 0 0% 6%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 221 83% 53%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 14%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14%;
-    --muted-foreground: 0 0% 64%;
-    --accent: 0 0% 14%;
-    --accent-foreground: 0 0% 98%;
-    --border: 0 0% 14%;
-    --input: 0 0% 14%;
-    --ring: 221 83% 53%;
+    /* Modo oscuro con la misma paleta pero invertida */
+    --background: 210 40% 8%;
+    --foreground: 210 40% 95%;
+    
+    --card: 210 40% 12%;
+    --card-foreground: 210 40% 95%;
+    
+    --popover: 210 40% 12%;
+    --popover-foreground: 210 40% 95%;
+    
+    --primary: 185 70% 55%;
+    --primary-foreground: 210 40% 8%;
+    --primary-hover: 185 70% 60%;
+    
+    --secondary: 175 30% 20%;
+    --secondary-foreground: 175 30% 80%;
+    --secondary-hover: 175 30% 25%;
+    
+    --muted: 210 30% 15%;
+    --muted-foreground: 210 30% 65%;
+    
+    --accent: 45 85% 60%;
+    --accent-foreground: 45 85% 10%;
+    
+    --border: 210 20% 25%;
+    --input: 210 20% 25%;
+    --ring: 185 70% 55%;
+    
+    /* Gradientes para modo oscuro */
+    --gradient-primary: linear-gradient(135deg, hsl(185 70% 55%), hsl(175 60% 65%));
+    --gradient-hero: linear-gradient(135deg, hsl(185 70% 55%) 0%, hsl(175 60% 65%) 50%, hsl(45 85% 60%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(210 40% 12%) 0%, hsl(185 30% 15%) 100%);
+    
+    --shadow-soft: 0 2px 8px hsl(185 70% 55% / 0.2);
+    --shadow-card: 0 4px 16px hsl(185 70% 55% / 0.25);
+    --shadow-floating: 0 8px 32px hsl(185 70% 55% / 0.3);
   }
 }
 

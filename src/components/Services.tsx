@@ -48,7 +48,7 @@ const Services = () => {
   const navigate = useNavigate();
   
   return (
-    <section className="py-24 bg-gradient-to-br from-indigo-50 via-white to-cyan-50 relative overflow-hidden">
+    <section className="py-24 bg-gradient-card relative overflow-hidden">
       <div className="container mx-auto px-6">
         {/* Header with Image */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 mb-16">
