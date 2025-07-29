@@ -71,6 +71,7 @@ const RegisterProfessional = () => {
   // Verification documents
   const [identityDocument, setIdentityDocument] = useState<File | null>(null);
   const [policeCertificate, setPoliceCertificate] = useState<File | null>(null);
+  const [professionalCertificate, setProfessionalCertificate] = useState<File | null>(null);
   const [uploadingDocs, setUploadingDocs] = useState(false);
 
   useEffect(() => {
@@ -221,8 +222,10 @@ const RegisterProfessional = () => {
           professional_id: professional.id,
           identity_document_url: documentUrls.identityUrl,
           police_certificate_url: documentUrls.policeUrl,
+          professional_certificate_url: documentUrls.professionalCertificateUrl,
           identity_verified: false,
           police_verified: false,
+          professional_certified: documentUrls.professionalCertificateUrl ? false : null,
           overall_verified: false
         });
 
@@ -280,16 +283,29 @@ const RegisterProfessional = () => {
 
       if (policeError) throw policeError;
 
+      // Upload professional certificate (optional)
+      let professionalCertificateUrl = null;
+      if (professionalCertificate) {
+        const professionalFileName = `${user?.id}/professional-${Date.now()}.${professionalCertificate.name.split('.').pop()}`;
+        const { data: professionalData, error: professionalError } = await supabase.storage
+          .from('professional-certificates')
+          .upload(professionalFileName, professionalCertificate);
+
+        if (professionalError) throw professionalError;
+        professionalCertificateUrl = professionalData.path;
+      }
+
       return {
         identityUrl: identityData.path,
-        policeUrl: policeData.path
+        policeUrl: policeData.path,
+        professionalCertificateUrl
       };
     } finally {
       setUploadingDocs(false);
     }
   };
 
-  const handleFileChange = (file: File | null, type: 'identity' | 'police') => {
+  const handleFileChange = (file: File | null, type: 'identity' | 'police' | 'professional') => {
     if (file) {
       // Validate file size (50MB max)
       if (file.size > 50 * 1024 * 1024) {
@@ -314,8 +330,10 @@ const RegisterProfessional = () => {
 
       if (type === 'identity') {
         setIdentityDocument(file);
-      } else {
+      } else if (type === 'police') {
         setPoliceCertificate(file);
+      } else if (type === 'professional') {
+        setProfessionalCertificate(file);
       }
 
       toast({
@@ -566,6 +584,38 @@ const RegisterProfessional = () => {
                       <div className="flex items-center gap-2 mt-2 text-sm text-green-600">
                         <CheckCircle className="h-4 w-4" />
                         <span>Carta cargada correctamente</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Professional Certificate Upload */}
+                  <div>
+                    <Label htmlFor="professionalCertificate" className="flex items-center gap-2 mb-2">
+                      <FileText className="h-4 w-4" />
+                      Título o Certificación Profesional (Opcional)
+                    </Label>
+                    <div className="border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary transition-colors">
+                      <input
+                        id="professionalCertificate"
+                        type="file"
+                        accept="image/*,.pdf"
+                        onChange={(e) => handleFileChange(e.target.files?.[0] || null, 'professional')}
+                        className="hidden"
+                      />
+                      <label htmlFor="professionalCertificate" className="cursor-pointer">
+                        <Upload className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
+                        <p className="text-sm font-medium">
+                          {professionalCertificate ? professionalCertificate.name : "Cargar título o certificación"}
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          PNG, JPG, WebP o PDF (máx. 50MB)
+                        </p>
+                      </label>
+                    </div>
+                    {professionalCertificate && (
+                      <div className="flex items-center gap-2 mt-2 text-sm text-green-600">
+                        <CheckCircle className="h-4 w-4" />
+                        <span>Certificación cargada correctamente</span>
                       </div>
                     )}
                   </div>

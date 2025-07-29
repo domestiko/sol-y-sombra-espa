@@ -141,6 +141,8 @@ export type Database = {
           overall_verified: boolean | null
           police_certificate_url: string | null
           police_verified: boolean | null
+          professional_certificate_url: string | null
+          professional_certified: boolean | null
           professional_id: string
           rejection_reason: string | null
           updated_at: string
@@ -156,6 +158,8 @@ export type Database = {
           overall_verified?: boolean | null
           police_certificate_url?: string | null
           police_verified?: boolean | null
+          professional_certificate_url?: string | null
+          professional_certified?: boolean | null
           professional_id: string
           rejection_reason?: string | null
           updated_at?: string
@@ -171,6 +175,8 @@ export type Database = {
           overall_verified?: boolean | null
           police_certificate_url?: string | null
           police_verified?: boolean | null
+          professional_certificate_url?: string | null
+          professional_certified?: boolean | null
           professional_id?: string
           rejection_reason?: string | null
           updated_at?: string
