@@ -12,7 +12,12 @@ const config: CapacitorConfig = {
   },
   plugins: {
     SplashScreen: {
-      launchShowDuration: 0,
+      launchShowDuration: 2000,
+      backgroundColor: "#3b82f6",
+      showSpinner: false,
+      androidSplashResourceName: "splash",
+      androidScaleType: "CENTER_CROP",
+      iosFadeOutDuration: 500
     },
   },
   ios: {
@@ -21,6 +26,12 @@ const config: CapacitorConfig = {
     webContentsDebuggingEnabled: true,
     allowsLinkPreview: false,
     handleApplicationURL: false
+  },
+  android: {
+    allowMixedContent: true,
+    captureInput: true,
+    webContentsDebuggingEnabled: true,
+    backgroundColor: "#3b82f6"
   }
 };
 
