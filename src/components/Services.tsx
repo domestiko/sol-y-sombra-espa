@@ -15,38 +15,32 @@ const services = [
   {
     icon: Wrench,
     title: "Plomería",
-    description: "Reparaciones, instalaciones y mantenimiento de tuberías, grifos y sistemas de agua.",
-    color: "text-blue-600"
+    description: "Reparaciones y mantenimiento de tuberías, grifos y sistemas de agua."
   },
   {
     icon: Zap,
     title: "Electricidad",
-    description: "Instalaciones eléctricas, reparación de enchufes, cambio de bombillas y más.",
-    color: "text-yellow-500"
+    description: "Instalaciones eléctricas, reparación de enchufes y sistemas eléctricos."
   },
   {
     icon: Scissors,
     title: "Jardinería",
-    description: "Mantenimiento de jardines, poda de plantas, diseño de espacios verdes.",
-    color: "text-green-600"
+    description: "Mantenimiento de jardines, poda y diseño de espacios verdes."
   },
   {
     icon: Home,
     title: "Limpieza",
-    description: "Limpieza profunda, mantenimiento regular, organización de espacios.",
-    color: "text-purple-600"
+    description: "Limpieza profunda y mantenimiento regular de espacios."
   },
   {
     icon: PaintBucket,
-    title: "Servicios de Pintura",
-    description: "Pintura interior y exterior, acabados especiales, reparación de paredes.",
-    color: "text-orange-600"
+    title: "Pintura",
+    description: "Pintura interior y exterior, acabados y reparación de paredes."
   },
   {
     icon: Settings,
     title: "Técnicos",
-    description: "Reparación de electrodomésticos, aire acondicionado, calentadores y más.",
-    color: "text-gray-600"
+    description: "Reparación de electrodomésticos y equipos del hogar."
   }
 ];
 
@@ -54,59 +48,57 @@ const Services = () => {
   const navigate = useNavigate();
   
   return (
-    <section className="py-20 bg-muted/30">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16 animate-fade-in-up">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Servicios para <span className="text-primary">cada necesidad</span> de tu hogar
+    <section className="py-24 bg-muted/30">
+      <div className="container mx-auto px-6">
+        {/* Header */}
+        <div className="text-center mb-16 space-y-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-balance">
+            Servicios para cada necesidad de tu hogar
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
             Profesionales capacitados y verificados listos para resolver cualquier tarea doméstica
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {services.map((service, index) => (
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {services.map((service) => (
             <Card 
               key={service.title} 
-              className="group hover:shadow-card transition-all duration-300 hover:-translate-y-2 bg-gradient-card border-0 animate-scale-in"
-              style={{animationDelay: `${index * 0.1}s`}}
+              className="group hover:shadow-lg transition-all duration-200 cursor-pointer border-0 bg-card/50"
+              onClick={() => navigate('/professionals')}
             >
-              <CardContent className="p-8 text-center">
-                <div className="mb-6 flex justify-center">
-                  <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <service.icon className="h-8 w-8 text-white" />
+              <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                    <service.icon className="h-6 w-6 text-primary" />
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="font-semibold text-lg">
+                      {service.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {service.description}
+                    </p>
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-4">
-                  {service.title}
-                </h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  {service.description}
-                </p>
-                <Button 
-                  variant="ghost" 
-                  className="group/btn text-primary hover:text-primary-foreground hover:bg-primary"
-                  onClick={() => navigate('/professionals')}
-                >
-                  Ver profesionales
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                </Button>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        <div className="text-center animate-fade-in">
-          <p className="text-muted-foreground mb-6">
+        {/* CTA */}
+        <div className="text-center space-y-4">
+          <p className="text-muted-foreground">
             ¿No encuentras el servicio que necesitas?
           </p>
           <Button 
-            variant="outline" 
-            size="lg"
+            variant="outline"
             onClick={() => navigate('/book-service')}
+            className="group"
           >
             Solicitar servicio personalizado
+            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Button>
         </div>
       </div>
