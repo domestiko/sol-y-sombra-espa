@@ -10,6 +10,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
+import TermsOfService from "@/components/TermsOfService";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { 
   User, 
   Phone, 
@@ -73,6 +75,9 @@ const RegisterProfessional = () => {
   const [policeCertificate, setPoliceCertificate] = useState<File | null>(null);
   const [professionalCertificate, setProfessionalCertificate] = useState<File | null>(null);
   const [uploadingDocs, setUploadingDocs] = useState(false);
+  
+  // Terms acceptance
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -173,6 +178,15 @@ const RegisterProfessional = () => {
       return;
     }
 
+    if (!termsAccepted) {
+      toast({
+        title: "Términos requeridos",
+        description: "Debes aceptar las políticas de uso para continuar",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setSubmitting(true);
 
     try {
@@ -189,7 +203,9 @@ const RegisterProfessional = () => {
           experience_years: parseInt(experienceYears),
           hourly_rate: parseFloat(hourlyRate),
           verified: false, // Will be reviewed by admin
-          available: true
+          available: true,
+          terms_accepted: true,
+          terms_accepted_at: new Date().toISOString()
         })
         .select()
         .single();
@@ -784,6 +800,10 @@ const RegisterProfessional = () => {
                       <CheckCircle className={`h-4 w-4 ${identityDocument && policeCertificate ? 'text-green-500' : 'text-muted-foreground'}`} />
                       <span>Documentos de verificación</span>
                     </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className={`h-4 w-4 ${termsAccepted ? 'text-green-500' : 'text-muted-foreground'}`} />
+                      <span>Políticas aceptadas</span>
+                    </div>
                   </div>
 
                   <div className="border-t pt-4">
@@ -795,17 +815,49 @@ const RegisterProfessional = () => {
                     </div>
                   </div>
 
+                  {/* Terms of Service Acceptance */}
+                  <div className="border-t pt-4">
+                    <div className="flex items-start space-x-2">
+                      <Checkbox
+                        id="professional-terms"
+                        checked={termsAccepted}
+                        onCheckedChange={(checked) => setTermsAccepted(!!checked)}
+                        className="mt-1"
+                      />
+                      <div className="grid gap-1.5 leading-none">
+                        <Label 
+                          htmlFor="professional-terms"
+                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                          Acepto las{' '}
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <button type="button" className="text-primary underline hover:no-underline">
+                                Políticas de Uso de Doméstiko
+                              </button>
+                            </DialogTrigger>
+                            <DialogContent className="max-w-4xl max-h-[80vh]">
+                              <DialogHeader>
+                                <DialogTitle>Políticas de Uso - Doméstiko</DialogTitle>
+                              </DialogHeader>
+                              <TermsOfService />
+                            </DialogContent>
+                          </Dialog>
+                        </Label>
+                        <p className="text-xs text-muted-foreground">
+                          Al aceptar, confirmas que has leído y comprendes nuestras políticas para profesionales.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
                   <Button 
                     type="submit" 
                     className="w-full" 
-                    disabled={submitting || selectedServices.length === 0 || !identityDocument || !policeCertificate}
+                    disabled={submitting || selectedServices.length === 0 || !identityDocument || !policeCertificate || !termsAccepted}
                   >
                     {submitting ? (uploadingDocs ? "Subiendo documentos..." : "Enviando...") : "Enviar Solicitud"}
                   </Button>
-
-                  <p className="text-xs text-muted-foreground text-center">
-                    Al enviar esta solicitud, aceptas nuestros términos de servicio para profesionales.
-                  </p>
                 </CardContent>
               </Card>
             </div>

@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const signUp = async (email: string, password: string, fullName: string) => {
     const redirectUrl = `${window.location.origin}/`;
     
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -59,6 +59,22 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
       }
     });
+
+    // Update profile with terms acceptance
+    if (data.user && !error) {
+      try {
+        await supabase
+          .from('profiles')
+          .update({
+            terms_accepted: true,
+            terms_accepted_at: new Date().toISOString()
+          })
+          .eq('user_id', data.user.id);
+      } catch (profileError) {
+        console.error('Error updating profile terms:', profileError);
+      }
+    }
+    
     return { error };
   };
 

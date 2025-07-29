@@ -10,6 +10,10 @@ import { useToast } from '@/hooks/use-toast';
 import { usePasswordValidation } from '@/hooks/usePasswordValidation';
 import { PasswordStrength } from '@/components/ui/password-strength';
 import { Home, Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
+import TermsOfService from '@/components/TermsOfService';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { supabase } from '@/integrations/supabase/client';
 
 const Auth = () => {
   const { user, signIn, signUp } = useAuth();
@@ -28,6 +32,7 @@ const Auth = () => {
   const [fullName, setFullName] = useState('');
   const [showSignUpPassword, setShowSignUpPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   // Password validation
   const passwordValidation = usePasswordValidation(signUpPassword);
@@ -86,6 +91,15 @@ const Auth = () => {
       toast({
         title: "Error",
         description: "Por favor completa todos los campos",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!termsAccepted) {
+      toast({
+        title: "Términos requeridos",
+        description: "Debes aceptar las políticas de uso para continuar",
         variant: "destructive",
       });
       return;
@@ -305,15 +319,50 @@ const Auth = () => {
                       <p className="text-sm text-green-600 flex items-center gap-2">
                         <span>✅ Las contraseñas coinciden</span>
                       </p>
-                    )}
-                  </div>
-                  <Button 
-                    type="submit" 
-                    className="w-full" 
-                    disabled={loading || !passwordValidation.isValid || signUpPassword !== confirmPassword}
-                  >
-                    {loading ? "Creando cuenta..." : "Crear Cuenta Segura"}
-                  </Button>
+                     )}
+                   </div>
+                   
+                   {/* Terms of Service Acceptance */}
+                   <div className="flex items-start space-x-2">
+                     <Checkbox
+                       id="terms"
+                       checked={termsAccepted}
+                       onCheckedChange={(checked) => setTermsAccepted(!!checked)}
+                       className="mt-1"
+                     />
+                     <div className="grid gap-1.5 leading-none">
+                       <Label 
+                         htmlFor="terms"
+                         className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                       >
+                         Acepto las{' '}
+                         <Dialog>
+                           <DialogTrigger asChild>
+                             <button type="button" className="text-primary underline hover:no-underline">
+                               Políticas de Uso de Doméstiko
+                             </button>
+                           </DialogTrigger>
+                           <DialogContent className="max-w-4xl max-h-[80vh]">
+                             <DialogHeader>
+                               <DialogTitle>Políticas de Uso - Doméstiko</DialogTitle>
+                             </DialogHeader>
+                             <TermsOfService />
+                           </DialogContent>
+                         </Dialog>
+                       </Label>
+                       <p className="text-xs text-muted-foreground">
+                         Al aceptar, confirmas que has leído y comprendes nuestras políticas.
+                       </p>
+                     </div>
+                   </div>
+                   
+                   <Button 
+                     type="submit" 
+                     className="w-full" 
+                     disabled={loading || !passwordValidation.isValid || signUpPassword !== confirmPassword || !termsAccepted}
+                   >
+                     {loading ? "Creando cuenta..." : "Crear Cuenta Segura"}
+                   </Button>
                 </form>
               </TabsContent>
             </Tabs>

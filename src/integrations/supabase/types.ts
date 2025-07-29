@@ -662,6 +662,8 @@ export type Database = {
           hourly_rate: number | null
           id: string
           phone: string
+          terms_accepted: boolean | null
+          terms_accepted_at: string | null
           updated_at: string
           user_id: string
           verified: boolean | null
@@ -678,6 +680,8 @@ export type Database = {
           hourly_rate?: number | null
           id?: string
           phone: string
+          terms_accepted?: boolean | null
+          terms_accepted_at?: string | null
           updated_at?: string
           user_id: string
           verified?: boolean | null
@@ -694,6 +698,8 @@ export type Database = {
           hourly_rate?: number | null
           id?: string
           phone?: string
+          terms_accepted?: boolean | null
+          terms_accepted_at?: string | null
           updated_at?: string
           user_id?: string
           verified?: boolean | null
@@ -708,6 +714,8 @@ export type Database = {
           full_name: string
           id: string
           phone: string | null
+          terms_accepted: boolean | null
+          terms_accepted_at: string | null
           updated_at: string
           user_id: string
         }
@@ -718,6 +726,8 @@ export type Database = {
           full_name: string
           id?: string
           phone?: string | null
+          terms_accepted?: boolean | null
+          terms_accepted_at?: string | null
           updated_at?: string
           user_id: string
         }
@@ -728,6 +738,8 @@ export type Database = {
           full_name?: string
           id?: string
           phone?: string | null
+          terms_accepted?: boolean | null
+          terms_accepted_at?: string | null
           updated_at?: string
           user_id?: string
         }
