@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import Professionals from "./pages/Professionals";
 import BookService from "./pages/BookService";
 import Profile from "./pages/Profile";
+import RegisterProfessional from "./pages/RegisterProfessional";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => {
               <Route path="/professionals" element={<Professionals />} />
               <Route path="/book-service" element={<BookService />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/register-professional" element={<RegisterProfessional />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

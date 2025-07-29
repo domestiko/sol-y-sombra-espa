@@ -2,9 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Smartphone, Download } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CTA = () => {
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,6 +62,7 @@ const CTA = () => {
                   variant="secondary" 
                   className="w-full"
                   size="lg"
+                  onClick={() => navigate('/book-service')}
                 >
                   Solicitar servicio
                   <ArrowRight className="ml-2 h-5 w-5" />
@@ -89,6 +92,7 @@ const CTA = () => {
                   variant="professional" 
                   className="w-full bg-white text-primary hover:bg-white/90"
                   size="lg"
+                  onClick={() => navigate('/register-professional')}
                 >
                   Registrarme como profesional
                   <ArrowRight className="ml-2 h-5 w-5" />

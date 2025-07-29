@@ -62,7 +62,7 @@ const Hero = () => {
               variant="professional" 
               size="lg" 
               className="w-full sm:w-auto"
-              onClick={() => navigate('/auth')}
+              onClick={() => navigate('/register-professional')}
             >
               Soy Profesional
             </Button>
