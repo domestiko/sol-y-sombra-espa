@@ -13,6 +13,9 @@ const config: CapacitorConfig = {
       launchShowDuration: 0,
     },
   },
+  ios: {
+    scheme: 'Doméstiko'
+  }
 };
 
 export default config;
