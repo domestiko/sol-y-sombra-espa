@@ -83,6 +83,166 @@ export type Database = {
           },
         ]
       }
+      job_completions: {
+        Row: {
+          booking_id: string
+          client_verification_at: string | null
+          commission_amount: number
+          commission_rate: number
+          completed_at: string
+          created_at: string
+          id: string
+          payment_date: string | null
+          payment_status: string | null
+          professional_id: string
+          service_amount: number
+          updated_at: string
+          user_id: string
+          verified_by_client: boolean | null
+        }
+        Insert: {
+          booking_id: string
+          client_verification_at?: string | null
+          commission_amount: number
+          commission_rate?: number
+          completed_at?: string
+          created_at?: string
+          id?: string
+          payment_date?: string | null
+          payment_status?: string | null
+          professional_id: string
+          service_amount: number
+          updated_at?: string
+          user_id: string
+          verified_by_client?: boolean | null
+        }
+        Update: {
+          booking_id?: string
+          client_verification_at?: string | null
+          commission_amount?: number
+          commission_rate?: number
+          completed_at?: string
+          created_at?: string
+          id?: string
+          payment_date?: string | null
+          payment_status?: string | null
+          professional_id?: string
+          service_amount?: number
+          updated_at?: string
+          user_id?: string
+          verified_by_client?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "job_completions_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: true
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "job_completions_professional_id_fkey"
+            columns: ["professional_id"]
+            isOneToOne: false
+            referencedRelation: "professionals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      premium_services: {
+        Row: {
+          created_at: string
+          duration_days: number | null
+          expires_at: string | null
+          id: string
+          price: number
+          professional_id: string
+          purchased_at: string
+          service_type: string
+          status: string | null
+        }
+        Insert: {
+          created_at?: string
+          duration_days?: number | null
+          expires_at?: string | null
+          id?: string
+          price: number
+          professional_id: string
+          purchased_at?: string
+          service_type: string
+          status?: string | null
+        }
+        Update: {
+          created_at?: string
+          duration_days?: number | null
+          expires_at?: string | null
+          id?: string
+          price?: number
+          professional_id?: string
+          purchased_at?: string
+          service_type?: string
+          status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "premium_services_professional_id_fkey"
+            columns: ["professional_id"]
+            isOneToOne: false
+            referencedRelation: "professionals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      professional_rankings: {
+        Row: {
+          average_rating: number | null
+          created_at: string
+          id: string
+          last_job_completed_at: string | null
+          professional_id: string
+          ranking_score: number | null
+          total_jobs_completed: number | null
+          total_revenue: number | null
+          total_reviews: number | null
+          updated_at: string
+          visibility_score: number | null
+        }
+        Insert: {
+          average_rating?: number | null
+          created_at?: string
+          id?: string
+          last_job_completed_at?: string | null
+          professional_id: string
+          ranking_score?: number | null
+          total_jobs_completed?: number | null
+          total_revenue?: number | null
+          total_reviews?: number | null
+          updated_at?: string
+          visibility_score?: number | null
+        }
+        Update: {
+          average_rating?: number | null
+          created_at?: string
+          id?: string
+          last_job_completed_at?: string | null
+          professional_id?: string
+          ranking_score?: number | null
+          total_jobs_completed?: number | null
+          total_revenue?: number | null
+          total_reviews?: number | null
+          updated_at?: string
+          visibility_score?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "professional_rankings_professional_id_fkey"
+            columns: ["professional_id"]
+            isOneToOne: true
+            referencedRelation: "professionals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       professional_services: {
         Row: {
           category_id: string
@@ -351,6 +511,20 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      calculate_commission: {
+        Args: { service_amount: number; commission_rate?: number }
+        Returns: number
+      }
+      calculate_ranking_score: {
+        Args: {
+          total_jobs: number
+          avg_rating: number
+          total_reviews: number
+          visibility: number
+          last_job_days_ago: number
+        }
+        Returns: number
+      }
       is_professional_verified: {
         Args: { prof_id: string }
         Returns: boolean
