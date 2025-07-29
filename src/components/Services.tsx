@@ -48,15 +48,15 @@ const Services = () => {
   const navigate = useNavigate();
   
   return (
-    <section className="py-24 bg-gradient-card relative overflow-hidden">
-      <div className="container mx-auto px-6">
+    <section className="py-16 md:py-20 bg-gradient-card relative overflow-hidden">
+      <div className="container mx-auto px-4">
         {/* Header with Image */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 mb-16">
-          <div className="lg:w-1/2 space-y-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-balance">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12 mb-12">
+          <div className="lg:w-1/2 space-y-3 text-center lg:text-left">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-balance">
               Servicios para cada necesidad de tu hogar
             </h2>
-            <p className="text-lg text-muted-foreground text-balance">
+            <p className="text-base md:text-lg text-muted-foreground text-balance max-w-lg mx-auto lg:mx-0">
               Profesionales capacitados y verificados listos para resolver cualquier tarea doméstica
             </p>
           </div>
@@ -64,26 +64,26 @@ const Services = () => {
             <img 
               src="/lovable-uploads/1f936c8a-34dc-4393-9f10-d3ea004c24ac.png" 
               alt="Equipo de profesionales de servicios domésticos"
-              className="w-80 h-80 object-contain hover:scale-105 transition-transform duration-300"
+              className="w-64 h-64 md:w-80 md:h-80 object-contain hover:scale-105 transition-transform duration-300"
             />
           </div>
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8">
           {services.map((service) => (
             <Card 
               key={service.title} 
-              className="group hover:shadow-lg transition-all duration-200 cursor-pointer border-0 bg-card/50"
+              className="group hover:shadow-card transition-all duration-200 cursor-pointer border-0 bg-card/50 backdrop-blur-sm hover:bg-card/70"
               onClick={() => navigate('/professionals')}
             >
-              <CardContent className="p-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                    <service.icon className="h-6 w-6 text-primary" />
+              <CardContent className="p-4 md:p-6">
+                <div className="flex items-start gap-3 md:gap-4">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                    <service.icon className="h-5 w-5 md:h-6 md:w-6 text-primary" />
                   </div>
-                  <div className="space-y-2">
-                    <h3 className="font-semibold text-lg">
+                  <div className="space-y-1 md:space-y-2">
+                    <h3 className="font-semibold text-base md:text-lg leading-tight">
                       {service.title}
                     </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
@@ -97,8 +97,8 @@ const Services = () => {
         </div>
 
         {/* CTA */}
-        <div className="text-center space-y-4">
-          <p className="text-muted-foreground">
+        <div className="text-center space-y-3">
+          <p className="text-sm md:text-base text-muted-foreground">
             ¿No encuentras el servicio que necesitas?
           </p>
           <Button 

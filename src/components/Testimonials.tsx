@@ -30,44 +30,44 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="py-24 bg-gradient-to-br from-rose-50 via-orange-50 to-amber-50 relative overflow-hidden">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16 space-y-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-balance">
+    <section className="py-16 md:py-20 bg-muted/30 relative overflow-hidden">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 text-balance">
             Lo que dicen nuestros clientes
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
             Testimonios reales de familias dominicanas que han confiado en nosotros
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto mb-8">
           {testimonials.map((testimonial, index) => (
-            <Card key={testimonial.name} className="border-0 bg-background/50 h-full">
-              <CardContent className="p-8 h-full flex flex-col">
+            <Card key={testimonial.name} className="border-0 bg-card/60 backdrop-blur-sm h-full hover:bg-card/80 transition-all duration-200">
+              <CardContent className="p-4 md:p-6 h-full flex flex-col">
                 {/* Quote Icon */}
-                <Quote className="h-8 w-8 text-primary/30 mb-4" />
+                <Quote className="h-6 w-6 md:h-8 md:w-8 text-primary/30 mb-3 md:mb-4" />
                 
                 {/* Rating */}
-                <div className="flex gap-1 mb-4">
+                <div className="flex gap-1 mb-3 md:mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                    <Star key={i} className="h-3 w-3 md:h-4 md:w-4 text-yellow-400 fill-current" />
                   ))}
                 </div>
 
                 {/* Comment */}
-                <p className="text-muted-foreground mb-6 flex-grow italic">
+                <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6 flex-grow italic leading-relaxed">
                   "{testimonial.comment}"
                 </p>
 
                 {/* User Info */}
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-semibold">
+                  <div className="w-8 h-8 md:w-12 md:h-12 bg-primary rounded-full flex items-center justify-center text-white font-semibold text-sm md:text-base">
                     {testimonial.avatar}
                   </div>
                   <div>
-                    <div className="font-semibold">{testimonial.name}</div>
-                    <div className="text-sm text-muted-foreground">
+                    <div className="font-semibold text-sm md:text-base">{testimonial.name}</div>
+                    <div className="text-xs md:text-sm text-muted-foreground">
                       {testimonial.location} • {testimonial.service}
                     </div>
                   </div>

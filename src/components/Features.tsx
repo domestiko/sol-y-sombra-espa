@@ -53,32 +53,32 @@ const Features = () => {
   return (
     <>
       {/* Main Features */}
-      <section className="py-24 bg-gradient-to-br from-slate-50 via-purple-50 to-pink-50 relative overflow-hidden">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16 space-y-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-balance">
+      <section className="py-16 md:py-20 bg-gradient-card relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 text-balance">
               ¿Por qué elegir Doméstiko?
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
+            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
               Tu seguridad y satisfacción son nuestra prioridad
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-16">
             {features.map((feature, index) => (
-              <Card key={feature.title} className="border-0 bg-muted/30 h-full">
-                <CardContent className="p-8 h-full flex flex-col">
-                  <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
-                    <feature.icon className="h-8 w-8 text-primary" />
+              <Card key={feature.title} className="border-0 bg-card/50 backdrop-blur-sm h-full hover:bg-card/70 transition-all duration-200">
+                <CardContent className="p-4 md:p-6 h-full flex flex-col">
+                  <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-4 md:mb-6">
+                    <feature.icon className="h-6 w-6 md:h-8 md:w-8 text-primary" />
                   </div>
                   
-                  <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
-                  <p className="text-muted-foreground mb-6 flex-grow">{feature.description}</p>
+                  <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-4 leading-tight">{feature.title}</h3>
+                  <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6 flex-grow leading-relaxed">{feature.description}</p>
                   
                   <div className="space-y-2">
                     {feature.highlights.map((highlight, i) => (
-                      <div key={i} className="flex items-center gap-2 text-sm">
-                        <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
+                      <div key={i} className="flex items-center gap-2 text-xs md:text-sm">
+                        <CheckCircle className="h-3 w-3 md:h-4 md:w-4 text-primary flex-shrink-0" />
                         <span>{highlight}</span>
                       </div>
                     ))}
