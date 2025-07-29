@@ -14,7 +14,8 @@ const config: CapacitorConfig = {
     },
   },
   ios: {
-    scheme: 'Doméstiko'
+    scheme: 'Doméstiko',
+    minVersion: '13.0'
   }
 };
 
