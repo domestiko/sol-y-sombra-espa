@@ -76,7 +76,7 @@ const Hero = () => {
           <Shield className="h-8 w-8 text-primary" />
         </div>
       </div>
-      <div className="absolute bottom-20 right-10 animate-float hidden lg:block" style={{animationDelay: '1s'}}>
+      <div className="absolute bottom-20 right-10 animate-float hidden lg:block" style={{animationDelay: "1s"}}>
         <div className="w-20 h-20 bg-secondary/10 rounded-full flex items-center justify-center">
           <Star className="h-10 w-10 text-secondary" />
         </div>
