@@ -256,7 +256,7 @@ const BookService = () => {
                               <div className="flex flex-col">
                                 <span className="font-medium">{prof.full_name}</span>
                                 <span className="text-sm text-muted-foreground">
-                                  {prof.city} • {prof.experience_years} años • ${prof.hourly_rate?.toLocaleString()}/hora
+                                  {prof.city} • {prof.experience_years} años • RD${prof.hourly_rate?.toLocaleString()}/hora
                                 </span>
                               </div>
                             </SelectItem>
@@ -358,7 +358,7 @@ const BookService = () => {
                         id="city"
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
-                        placeholder="Bogotá"
+                        placeholder="Santo Domingo"
                       />
                     </div>
 
@@ -368,7 +368,7 @@ const BookService = () => {
                         id="phone"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        placeholder="+57 300 123 4567"
+                        placeholder="+1 809 123 4567"
                       />
                     </div>
                   </div>
@@ -397,7 +397,7 @@ const BookService = () => {
                         </div>
                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
                           <DollarSign className="h-4 w-4" />
-                          <span>${selectedProf.hourly_rate?.toLocaleString()}/hora</span>
+                          <span>RD${selectedProf.hourly_rate?.toLocaleString()}/hora</span>
                         </div>
                       </div>
 
@@ -405,7 +405,7 @@ const BookService = () => {
                         <div className="border-t pt-4">
                           <div className="flex justify-between">
                             <span className="text-sm">Costo estimado:</span>
-                            <span className="font-medium">${estimatedCost.toLocaleString()}</span>
+                            <span className="font-medium">RD${estimatedCost.toLocaleString()}</span>
                           </div>
                           <p className="text-xs text-muted-foreground mt-1">
                             * Precio aproximado basado en {estimatedHours} horas

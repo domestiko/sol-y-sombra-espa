@@ -238,7 +238,7 @@ const Professionals = () => {
                     </span>
                     {professional.hourly_rate && (
                       <span className="font-semibold">
-                        ${professional.hourly_rate}/hora
+                        RD${professional.hourly_rate}/hora
                       </span>
                     )}
                   </div>

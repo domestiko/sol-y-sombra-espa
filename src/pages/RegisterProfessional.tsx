@@ -429,7 +429,7 @@ const RegisterProfessional = () => {
                           id="phone"
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
-                          placeholder="+57 300 123 4567"
+                          placeholder="+1 809 123 4567"
                           className="pl-10"
                           required
                         />
@@ -443,7 +443,7 @@ const RegisterProfessional = () => {
                           id="city"
                           value={city}
                           onChange={(e) => setCity(e.target.value)}
-                          placeholder="Bogotá"
+                          placeholder="Santo Domingo"
                           className="pl-10"
                           required
                         />
@@ -482,17 +482,17 @@ const RegisterProfessional = () => {
                       </div>
                     </div>
                     <div>
-                      <Label htmlFor="hourlyRate">Tarifa por hora (COP) *</Label>
+                      <Label htmlFor="hourlyRate">Tarifa por hora (RD$) *</Label>
                       <div className="relative">
                         <DollarSign className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                         <Input
                           id="hourlyRate"
                           type="number"
-                          min="10000"
-                          step="1000"
+                          min="500"
+                           step="50"
                           value={hourlyRate}
                           onChange={(e) => setHourlyRate(e.target.value)}
-                          placeholder="25000"
+                          placeholder="1500"
                           className="pl-10"
                           required
                         />
@@ -695,27 +695,27 @@ const RegisterProfessional = () => {
 
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <Label htmlFor="priceMin">Precio mínimo (COP) *</Label>
+                          <Label htmlFor="priceMin">Precio mínimo (RD$) *</Label>
                           <Input
                             id="priceMin"
                             type="number"
-                            min="1000"
-                            step="1000"
+                             min="100"
+                             step="50"
                             value={currentService.priceMin}
                             onChange={(e) => setCurrentService({...currentService, priceMin: e.target.value})}
-                            placeholder="20000"
+                            placeholder="800"
                           />
                         </div>
                         <div>
-                          <Label htmlFor="priceMax">Precio máximo (COP)</Label>
+                          <Label htmlFor="priceMax">Precio máximo (RD$)</Label>
                           <Input
                             id="priceMax"
                             type="number"
-                            min="1000"
-                            step="1000"
+                            min="100"
+                            step="50"
                             value={currentService.priceMax}
                             onChange={(e) => setCurrentService({...currentService, priceMax: e.target.value})}
-                            placeholder="50000"
+                            placeholder="1500"
                           />
                         </div>
                       </div>
@@ -742,8 +742,8 @@ const RegisterProfessional = () => {
                                 <p className="text-sm text-muted-foreground mt-1">{service.description}</p>
                               )}
                               <div className="text-sm text-muted-foreground mt-2">
-                                ${parseInt(service.priceMin).toLocaleString()}
-                                {service.priceMax && ` - $${parseInt(service.priceMax).toLocaleString()}`}
+                                 RD${parseInt(service.priceMin).toLocaleString()}
+                                 {service.priceMax && ` - RD$${parseInt(service.priceMax).toLocaleString()}`}
                               </div>
                             </div>
                             <Button
