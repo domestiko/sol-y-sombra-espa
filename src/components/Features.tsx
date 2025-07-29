@@ -2,117 +2,151 @@ import { Card, CardContent } from "@/components/ui/card";
 import { 
   Shield, 
   Clock, 
-  MapPin, 
   Star, 
-  CreditCard, 
-  Headphones 
+  Users,
+  CreditCard,
+  MapPin,
+  Phone,
+  CheckCircle
 } from "lucide-react";
 
 const features = [
   {
     icon: Shield,
     title: "Profesionales Verificados",
-    description: "Todos nuestros profesionales pasan por un riguroso proceso de verificación de identidad, experiencia y referencias.",
-    gradient: "from-blue-500 to-blue-600"
+    description: "Todos nuestros profesionales pasan por un riguroso proceso de verificación incluyendo documentos de identidad y antecedentes penales.",
+    highlights: ["Verificación de identidad", "Carta de buena conducta", "Certificaciones profesionales"]
   },
   {
     icon: Clock,
     title: "Respuesta Rápida",
-    description: "Encuentra un profesional disponible en menos de 30 minutos. Servicios de emergencia 24/7.",
-    gradient: "from-green-500 to-green-600"
-  },
-  {
-    icon: MapPin,
-    title: "Cerca de Ti",
-    description: "Localiza profesionales en tu zona usando nuestra tecnología de geolocalización avanzada.",
-    gradient: "from-purple-500 to-purple-600"
+    description: "Conectamos contigo con profesionales disponibles en tu zona de forma inmediata, sin esperas innecesarias.",
+    highlights: ["Respuesta en minutos", "Disponibilidad 24/7", "Agenda flexible"]
   },
   {
     icon: Star,
-    title: "Calificaciones Reales",
-    description: "Sistema de reseñas y calificaciones transparente basado en experiencias reales de usuarios.",
-    gradient: "from-yellow-500 to-orange-500"
+    title: "Calidad Garantizada",
+    description: "Sistema de calificaciones y reseñas que asegura servicios de alta calidad y profesionales confiables.",
+    highlights: ["Sistema de reseñas", "Garantía de servicio", "Soporte continuo"]
+  }
+];
+
+const howItWorks = [
+  {
+    step: "1",
+    title: "Describe tu necesidad",
+    description: "Cuéntanos qué servicio necesitas y cuándo lo necesitas"
   },
   {
-    icon: CreditCard,
-    title: "Pagos Seguros",
-    description: "Múltiples opciones de pago seguras. Paga después del servicio con total tranquilidad.",
-    gradient: "from-indigo-500 to-indigo-600"
+    step: "2", 
+    title: "Conectamos contigo",
+    description: "Te conectamos con profesionales verificados en tu zona"
   },
   {
-    icon: Headphones,
-    title: "Soporte 24/7",
-    description: "Nuestro equipo de atención al cliente está disponible para ayudarte en cualquier momento.",
-    gradient: "from-pink-500 to-pink-600"
+    step: "3",
+    title: "Servicio completado",
+    description: "El profesional realiza el trabajo y tú calificas la experiencia"
   }
 ];
 
 const Features = () => {
   return (
-    <section className="py-20 bg-background">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16 animate-fade-in-up">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            ¿Por qué elegir <span className="text-primary">Doméstiko</span>?
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Hemos diseñado cada aspecto de nuestra plataforma pensando en tu seguridad, 
-            comodidad y tranquilidad
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <Card 
-              key={feature.title}
-              className="group hover:shadow-floating transition-all duration-500 hover:-translate-y-3 bg-gradient-card border-0 animate-scale-in"
-              style={{animationDelay: `${index * 0.15}s`}}
-            >
-              <CardContent className="p-8">
-                <div className="mb-6">
-                  <div className={`w-14 h-14 bg-gradient-to-r ${feature.gradient} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-soft`}>
-                    <feature.icon className="h-7 w-7 text-white" />
-                  </div>
-                </div>
-                <h3 className="text-xl font-semibold text-foreground mb-4 group-hover:text-primary transition-colors">
-                  {feature.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {feature.description}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {/* Trust Section */}
-        <div className="mt-20 text-center animate-fade-in">
-          <div className="bg-gradient-hero rounded-2xl p-12 shadow-card">
-            <h3 className="text-3xl font-bold text-foreground mb-4">
-              Más de <span className="text-primary">5,000 familias</span> confían en nosotros
-            </h3>
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Únete a la comunidad de hogares que han transformado la manera de gestionar 
-              sus servicios domésticos con total seguridad y confianza.
+    <>
+      {/* Main Features */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16 space-y-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-balance">
+              ¿Por qué elegir Doméstiko?
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
+              Tu seguridad y satisfacción son nuestra prioridad
             </p>
-            <div className="flex justify-center items-center gap-8 flex-wrap">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary">4.9/5</div>
-                <div className="text-sm text-muted-foreground">Calificación promedio</div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
+              <Card key={feature.title} className="border-0 bg-muted/30 h-full">
+                <CardContent className="p-8 h-full flex flex-col">
+                  <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
+                    <feature.icon className="h-8 w-8 text-primary" />
+                  </div>
+                  
+                  <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
+                  <p className="text-muted-foreground mb-6 flex-grow">{feature.description}</p>
+                  
+                  <div className="space-y-2">
+                    {feature.highlights.map((highlight, i) => (
+                      <div key={i} className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
+                        <span>{highlight}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How it Works */}
+      <section className="py-24 bg-muted/30">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16 space-y-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-balance">
+              Cómo funciona
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
+              En solo 3 pasos sencillos conectamos tu hogar con el profesional ideal
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            {howItWorks.map((step, index) => (
+              <div key={step.step} className="text-center relative">
+                {/* Connection Line */}
+                {index < howItWorks.length - 1 && (
+                  <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-border -translate-x-1/2 z-0" />
+                )}
+                
+                <div className="relative z-10">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-6 text-white font-bold text-xl">
+                    {step.step}
+                  </div>
+                  <h3 className="text-xl font-semibold mb-4">{step.title}</h3>
+                  <p className="text-muted-foreground">{step.description}</p>
+                </div>
               </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-secondary">98%</div>
-                <div className="text-sm text-muted-foreground">Satisfacción del cliente</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary">24/7</div>
-                <div className="text-sm text-muted-foreground">Soporte disponible</div>
-              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-24 bg-primary text-white">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div className="space-y-2">
+              <div className="text-3xl md:text-4xl font-bold">1,000+</div>
+              <div className="text-white/80">Servicios completados</div>
+            </div>
+            <div className="space-y-2">
+              <div className="text-3xl md:text-4xl font-bold">500+</div>
+              <div className="text-white/80">Profesionales activos</div>
+            </div>
+            <div className="space-y-2">
+              <div className="text-3xl md:text-4xl font-bold">15</div>
+              <div className="text-white/80">Ciudades cubiertas</div>
+            </div>
+            <div className="space-y-2">
+              <div className="text-3xl md:text-4xl font-bold">4.9</div>
+              <div className="text-white/80">Calificación promedio</div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

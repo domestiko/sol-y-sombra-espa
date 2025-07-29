@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, Shield, Clock, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
@@ -22,19 +22,22 @@ const Hero = () => {
             </p>
           </div>
 
-          {/* Features */}
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <Check className="h-4 w-4 text-primary" />
-              <span>100% Verificados</span>
+          {/* Stats Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-3xl mx-auto">
+            <div className="bg-card/50 backdrop-blur-sm rounded-lg p-4 border text-center">
+              <Shield className="h-8 w-8 text-primary mx-auto mb-2" />
+              <div className="text-2xl font-bold text-foreground">100%</div>
+              <div className="text-sm text-muted-foreground">Verificados</div>
             </div>
-            <div className="flex items-center gap-2">
-              <Check className="h-4 w-4 text-primary" />
-              <span>Respuesta inmediata</span>
+            <div className="bg-card/50 backdrop-blur-sm rounded-lg p-4 border text-center">
+              <Users className="h-8 w-8 text-primary mx-auto mb-2" />
+              <div className="text-2xl font-bold text-foreground">1,000+</div>
+              <div className="text-sm text-muted-foreground">Clientes satisfechos</div>
             </div>
-            <div className="flex items-center gap-2">
-              <Check className="h-4 w-4 text-primary" />
-              <span>Garantía de servicio</span>
+            <div className="bg-card/50 backdrop-blur-sm rounded-lg p-4 border text-center">
+              <Clock className="h-8 w-8 text-primary mx-auto mb-2" />
+              <div className="text-2xl font-bold text-foreground">24/7</div>
+              <div className="text-sm text-muted-foreground">Disponibilidad</div>
             </div>
           </div>
 
